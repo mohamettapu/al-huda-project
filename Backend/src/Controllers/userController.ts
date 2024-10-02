@@ -1,6 +1,6 @@
 // userController.ts
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, role } from "@prisma/client";
 import argon2 from "argon2";
 import { giveTokens } from "../helpers/jwt";
 
@@ -224,6 +224,57 @@ export const allUsers = async (req: Request, res: Response) => {
     console.log("error of fetching teachers is " + error);
     return res.status(500).json({
       msg: "some thing went wrong",
+    });
+  }
+};
+
+export const changeRole = async (req: Request, res: Response) => {
+  try {
+    const { userid, role } = req.body as { userid: number; role: role };
+    // @ts-ignore
+    const id = req.user.id;
+    if (!userid || !role) {
+      return res.status(400).json({
+        msg: "please provide userid and role",
+      });
+    }
+    const checkUser = await prisma.users.findFirst({
+      where: {
+        id: userid,
+      },
+    });
+
+    // check if user is updating its role
+    if (id === userid) {
+      return res.status(400).json({
+        msg: "sorry you can't update your role",
+      });
+    }
+    // check if user no found
+
+    if (!checkUser) {
+      return res.status(404).json({
+        msg: "user not found",
+      });
+    }
+
+    const updateRole = await prisma.users.update({
+      where: {
+        id: userid,
+      },
+      data: {
+        role: role,
+      },
+    });
+    const { password, ...rest } = updateRole;
+    res.status(200).json({
+      msg: "success",
+      user: rest,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: "some error occurred",
     });
   }
 };

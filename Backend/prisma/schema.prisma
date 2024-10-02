@@ -42,7 +42,9 @@ model Evaluations{
   criteria          Criteria[]
   rating            Rating[]
   points            Int[]
-
+  evaluation_No      String @default("0")
+  createdAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
   teacher           Teacher   @relation(fields: [teacherId], references: [id])
 }
 

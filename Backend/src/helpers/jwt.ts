@@ -7,7 +7,7 @@ export const giveTokens = (
     userid,
   };
   const accessToken = Jwt.sign(payload, process.env.JWT_SECRET_KAY as string, {
-    expiresIn: "1m",
+    expiresIn: "11m",
   });
 
   const refreshToken = Jwt.sign(

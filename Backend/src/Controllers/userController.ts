@@ -71,6 +71,15 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
+    // @ts-ignore
+    const userid = req.user.id;
+
+    if (!userid) {
+      return res.status(403).json({
+        msg: "Unauthorized",
+      });
+    }
+
     const { email, username, password, phone } = req.body as {
       email?: string;
       username?: string;
@@ -80,7 +89,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     const user = await prisma.users.findFirst({
       where: {
-        OR: [{ phone }, { email }, { username }],
+        id: userid,
       },
     });
 
@@ -173,7 +182,7 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(200).json({
       msg: "Success",
-
+      phone: checkUser.phone,
       accessToken,
       refreshToken,
     });
@@ -194,6 +203,27 @@ export const whoAmI = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(401).json({
       message: "Unathorized",
+    });
+  }
+};
+export const allUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await prisma.users.findMany({});
+
+    if (!users) {
+      return res.status(404).json({
+        msg: "no users available",
+      });
+    }
+
+    res.status(200).json({
+      msg: "Success",
+      data: users,
+    });
+  } catch (error) {
+    console.log("error of fetching teachers is " + error);
+    return res.status(500).json({
+      msg: "some thing went wrong",
     });
   }
 };

@@ -20,7 +20,54 @@ firstname String
 lastname String
 email String @unique
 phone String @unique
+role role @default(user)
 createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
 
+}
+
+model Teacher{
+  id Int @id @default(autoincrement())
+  fullName String
+  phone  String @unique
+  evaluations Evaluations[]
+}
+
+
+model Evaluations{
+    id                Int       @id @default(autoincrement())
+  teacherId         Int      
+  phone               String 
+  assessmentArea    AssessmentArea[]
+  criteria          Criteria[]
+  rating            Rating[]
+  points            Int[]
+
+  teacher           Teacher   @relation(fields: [teacherId], references: [id])
+}
+
+
+enum role{
+  admin
+  user
+}
+enum AssessmentArea {
+  SUPERVISION_FEEDBACK
+  ACADEMIC_PERFORMANCE
+  EXTERNAL_SUPERVISION
+  STUDENT_FEEDBACK
+}
+
+enum Criteria {
+  INSTRUCTIONAL_STRATEGIES
+  AVERAGE_CLASS_GRADES
+  CLASSROOM_MANAGEMENT
+  POSITIVE_STUDENT_INTERACTIONS
+}
+
+enum Rating {
+  EXCEEDS_EXPECTATION
+  MEETS_EXPECTATION
+  NEEDS_IMPROVEMENT
+  UNSATISFACTORY
 }

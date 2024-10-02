@@ -58,3 +58,22 @@ export const authenticate = async (
     });
   }
 };
+
+export const authorize = (requiredRoles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      //@ts-ignore
+      if (requiredRoles.includes(req.user.role)) {
+        return next();
+      }
+
+      return res.status(401).json({
+        msg: "Un Authorized",
+      });
+    } catch (error) {
+      return res.status(401).json({
+        message: "Un Authorized",
+      });
+    }
+  };
+};

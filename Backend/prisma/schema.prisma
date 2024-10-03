@@ -73,3 +73,12 @@ enum Rating {
   NEEDS_IMPROVEMENT
   UNSATISFACTORY
 }
+
+
+model resetPasswordCodes{
+  id Int @id @default(autoincrement())
+  code Int 
+  isUsed Boolean @default(false)
+  userEmail String
+  sentDate DateTime @default(now())
+}

@@ -166,7 +166,7 @@ export const login = async (req: Request, res: Response) => {
     });
 
     if (!checkUser) {
-      return res.status(404).json({
+      return res.status(401).json({
         msg: "Invalid login username",
       });
     }

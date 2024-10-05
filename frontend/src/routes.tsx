@@ -4,6 +4,9 @@ import Login from "./Pages/Auth/Login";
 import MainComponent from "./Pages/MainComponent";
 
 import Dashboard from "./Pages/Dashboard";
+import SendResetCode from "./Pages/Auth/SendResetCode";
+import CheckResetCode from "./Pages/Auth/CHeckResetCode";
+import ResetPassword from "./Pages/Auth/ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +26,18 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "send-reset-code",
+        element: <SendResetCode />,
+      },
+      {
+        path: "check-reset-code",
+        element: <CheckResetCode />,
+      },
+      {
+        path: "reset-password/update",
+        element: <ResetPassword />,
       },
     ],
   },

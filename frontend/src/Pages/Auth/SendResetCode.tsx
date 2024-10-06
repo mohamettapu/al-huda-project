@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 // import { LoginFN } from "../../Redux/Slices/Auth/loginSLice";
-import { sendResetCodeFN } from "../../Redux/Slices/Auth/sendEmail";
+import { resetData, sendResetCodeFN } from "../../Redux/Slices/Auth/sendEmail";
 // import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const SendResetCode = () => {
@@ -26,12 +26,13 @@ const SendResetCode = () => {
       toast.success(SendResetCodeToEmailState.data.msg);
       console.log(SendResetCodeToEmailState.data.msg);
       navigate("/check-reset-code");
+      dispatch(resetData());
     }
     if (SendResetCodeToEmailState.isError) {
       console.log(SendResetCodeToEmailState.errorMsg);
       toast.error(SendResetCodeToEmailState.errorMsg);
     }
-  }, [navigate, SendResetCodeToEmailState]);
+  }, [dispatch, navigate, SendResetCodeToEmailState]);
   const formik = useFormik({
     initialValues: {
       clientEmail: "",
@@ -57,17 +58,17 @@ const SendResetCode = () => {
             htmlFor=""
             className="font-geist font-bold text-2xl text-[#1e1e20dd]"
           >
-            Welcome Back!
+            Reset Your Password
           </label>
           <label htmlFor="" className="font-geist  text-[#38383b]">
-            Enter your credentials to login your account
+            Please enter your email to receive the reset code
           </label>
         </div>
 
         <div className=" inputs w-[100%] flex flex-col gap-3">
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <h1 className="font-geist text-[1.1rem] font-medium text-[#38383c]">
-              Email
+              Email Address
             </h1>
             <input
               type="text"
@@ -92,12 +93,12 @@ const SendResetCode = () => {
               disabled={!formik.isValid}
               className="py-3 font-geist rounded-[.4rem]  border-1 text-white font-bold border-white bg-[#000000] hover:w-[95%] mx-auto duration-500   px-3 w-[100%]"
             >
-              Send Email
+              Send Reset Code
             </button>
           </div>
 
           <div className="signup flex  text-center w-[100%] justify-center items-center gap-2">
-            <p className="font-geist text-[14px] text-[#000]">l?</p>
+            <p className="font-geist text-[14px] text-[#000]">Remembered?</p>
             <Link
               className="font-geist text-[16px] text-[#000] border-b-2"
               to={"/auth/login"}

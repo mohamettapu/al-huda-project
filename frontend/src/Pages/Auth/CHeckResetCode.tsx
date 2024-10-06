@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 // import { LoginFN } from "../../Redux/Slices/Auth/loginSLice";
 
-import { checkResetCodeFN } from "../../Redux/Slices/Auth/checkResetCode";
+import { checkResetCodeFN, resetData } from "../../Redux/Slices/Auth/checkResetCode";
 // import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const CheckResetCode = () => {
@@ -27,12 +27,13 @@ const CheckResetCode = () => {
       toast.success(CheckResetCodeState.data.msg);
       console.log(CheckResetCodeState.data.msg);
       navigate("/reset-password/update");
+      dispatch(resetData());
     }
     if (CheckResetCodeState.isError) {
       console.log(CheckResetCodeState.errorMsg);
       toast.error(CheckResetCodeState.errorMsg);
     }
-  }, [navigate, CheckResetCodeState]);
+  }, [dispatch, navigate, CheckResetCodeState]);
   const formik = useFormik({
     initialValues: {
       resetCode: 0,
@@ -56,17 +57,17 @@ const CheckResetCode = () => {
             htmlFor=""
             className="font-geist font-bold text-2xl text-[#1e1e20dd]"
           >
-            Enter Reset code Back!
+            Enter your Reset code
           </label>
           <label htmlFor="" className="font-geist  text-[#38383b]">
-            Enter code that sent to your email
+            Please input the code we sent to your email.
           </label>
         </div>
 
         <div className=" inputs w-[100%] flex flex-col gap-3">
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <h1 className="font-geist text-[1.1rem] font-medium text-[#38383c]">
-              Code
+              Reset Code
             </h1>
             <input
               type="number"

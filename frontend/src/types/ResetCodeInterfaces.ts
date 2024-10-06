@@ -12,3 +12,10 @@ export interface IcheckResetCodePayload {
 export interface IcheckResetCodeResponse {
   msg: string;
 }
+
+export interface IResetPasswordPayload {
+  newPassword: string;
+}
+export interface IResetPasswordResponse {
+  msg: string;
+}

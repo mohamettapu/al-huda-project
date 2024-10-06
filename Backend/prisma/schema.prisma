@@ -21,9 +21,11 @@ lastname String
 email String @unique
 phone String @unique
 role role @default(user)
+// teacherid Int
 createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
 
+// teacher Teacher @relation(fields: [teacherid],references: [id])
 }
 
 model Teacher{
@@ -31,6 +33,7 @@ model Teacher{
   fullName String
   phone  String @unique
   evaluations Evaluations[]
+  // users users[]
 }
 
 

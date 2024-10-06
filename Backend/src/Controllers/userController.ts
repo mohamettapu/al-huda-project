@@ -15,6 +15,20 @@ export const createUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ msg: "Please provide all required fields." });
     }
+    const countryCode = "+252";
+    const fullphone = `${countryCode}${phone}`;
+    const checkTeacher = await prisma.teacher.findFirst({
+      where: {
+        phone: fullphone,
+      },
+    });
+
+    if (!checkTeacher) {
+      return res.status(404).json({
+        msg: "only teachers of alhuda can use this system",
+        msg1: "you are not teachers of alhuda ",
+      });
+    }
 
     const existingUser = await prisma.users.findFirst({
       where: { OR: [{ phone }, { email }] },
@@ -35,8 +49,6 @@ export const createUser = async (req: Request, res: Response) => {
       });
     }
 
-    const countryCode = "+252";
-    const fullphone = `${countryCode}${phone}`;
     const hashedPassword = await argon2.hash(password);
 
     // Create new user
@@ -65,7 +77,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error creating user:", error);
-    return res.status(500).json({ msg: "Something went wrong" });
+    res.status(500).json({ msg: "Something went wrong" });
   }
 };
 
@@ -188,7 +200,7 @@ export const login = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error creating user:", error);
-    return res.status(500).json({ msg: "Something went wrong" });
+    res.status(400).json({ msg: "Something went wrong" });
   }
 };
 

@@ -2,12 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import { LoginSLice } from "./Slices/Auth/loginSLice";
 import { sendResetCodeSlice } from "./Slices/Auth/sendEmail";
 import { checkResetCodeSlice } from "./Slices/Auth/checkResetCode";
+import { resetPasswordSLice } from "./Slices/Auth/resetPasswordSlice";
+import { signUpSlice } from "./Slices/Auth/signUpSlice";
 
 export const store = configureStore({
   reducer: {
     login: LoginSLice.reducer,
     sendEmail: sendResetCodeSlice.reducer,
     checkResetCode: checkResetCodeSlice.reducer,
+    resetPasswordState: resetPasswordSLice.reducer,
+    SingUpState: signUpSlice.reducer,
   },
 });
 

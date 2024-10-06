@@ -45,14 +45,13 @@ export const sendResetCodeSlice = createSlice({
   name: "send reset code Slice",
   initialState,
   reducers: {
-    // logout: (state) => {
-    //   state.data = {} as ISendEmailPayload;
-    //   state.isLoading = false;
-    //   state.isSuccess = false;
-    //   state.isError = false;
-    //   state.errorMsg = "";
-    //   localStorage.removeItem("userInfo");
-    // },
+    resetData: (state) => {
+      state.data = {} as ISendEmailResponse;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.errorMsg = "";
+    },
   },
   extraReducers(builder) {
     builder.addCase(sendResetCodeFN.pending, (state) => {
@@ -81,4 +80,4 @@ export const sendResetCodeSlice = createSlice({
   },
 });
 
-// export const { logout } = LoginSLice.actions;
+export const { resetData } = sendResetCodeSlice.actions;

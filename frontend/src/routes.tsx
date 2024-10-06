@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard";
 import SendResetCode from "./Pages/Auth/SendResetCode";
 import CheckResetCode from "./Pages/Auth/CHeckResetCode";
 import ResetPassword from "./Pages/Auth/ResetPassword";
+import SignUp from "./Pages/Auth/SignUP";
 
 export const router = createBrowserRouter([
   {
@@ -17,12 +18,24 @@ export const router = createBrowserRouter([
         path: "Login",
         element: <Login />,
       },
+      {
+        path: "signUp",
+        element: <SignUp />,
+      },
     ],
   },
   {
     path: "/",
     element: <AuthLayout />,
     children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signUp",
+        element: <SignUp />,
+      },
       {
         path: "login",
         element: <Login />,

@@ -75,7 +75,7 @@ const Login = () => {
               value={formik.values.username}
               className="py-3 font-geist rounded-[.4rem] text-black border-1 border-white bg-[#e2e7f369]  px-3 w-[100%]"
             />
-            <p className="font-geist text-[13px] text-[#b00c0c]">
+            <p className="font-geist text-[13px] text-[#f00]">
               {formik.errors.username
                 ? formik.touched.username
                   ? formik.errors.username

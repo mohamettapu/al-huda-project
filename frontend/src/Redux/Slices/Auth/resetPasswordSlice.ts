@@ -4,13 +4,13 @@ import { default_error_message } from "../../../constants";
 import apiClient from "../../../services/axiosConfing";
 
 import {
-  IcheckResetCodePayload,
-  IcheckResetCodeResponse,
+  IResetPasswordPayload,
+  IResetPasswordResponse,
 } from "../../../types/ResetCodeInterfaces";
 
 const resetCodeData = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo")!)
-  : ({} as IcheckResetCodeResponse);
+  : ({} as IResetPasswordResponse);
 const initialState = {
   data: resetCodeData,
   isLoading: false,
@@ -19,9 +19,9 @@ const initialState = {
   errorMsg: "",
 };
 
-export const checkResetCodeFN = createAsyncThunk(
-  "auth/check/reset/code",
-  async (data: IcheckResetCodePayload, { rejectWithValue }) => {
+export const resetPasswordFN = createAsyncThunk(
+  "auth/[password/reset",
+  async (data: IResetPasswordPayload, { rejectWithValue }) => {
     try {
       const userInfoString = localStorage.getItem("userInfo");
       if (!userInfoString) {
@@ -33,13 +33,9 @@ export const checkResetCodeFN = createAsyncThunk(
         return rejectWithValue("No access token");
       }
 
-      const res = await apiClient.post(
-        "/user/reset-password/check-code",
-        data,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await apiClient.put("/user/reset-password/update", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (res.data) {
         return res.data;
@@ -57,45 +53,45 @@ export const checkResetCodeFN = createAsyncThunk(
   }
 );
 
-export const checkResetCodeSlice = createSlice({
-  name: "check/code Slice",
+export const resetPasswordSLice = createSlice({
+  name: "reset password",
   initialState,
   reducers: {
-
     resetData:(state)=>{
 
-      state.data = {} as IcheckResetCodeResponse;
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.isError = false;
-      state.errorMsg = "";
-    }
+        state.data = {} as IResetPasswordResponse;
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = false;
+        state.errorMsg = "";
+      }
   },
   extraReducers(builder) {
-    builder.addCase(checkResetCodeFN.pending, (state) => {
+    builder.addCase(resetPasswordFN.pending, (state) => {
       state.isLoading = true;
       state.isError = false;
       state.errorMsg = "";
       state.isSuccess = false;
-      state.data = {} as IcheckResetCodeResponse;
+      state.data = {} as IResetPasswordResponse;
     });
-    builder.addCase(checkResetCodeFN.fulfilled, (state, action) => {
+    builder.addCase(resetPasswordFN.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
       state.isError = false;
       state.errorMsg = "";
       state.data = action.payload;
+
       localStorage.removeItem("userInfo");
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
     });
-    builder.addCase(checkResetCodeFN.rejected, (state, action) => {
+    builder.addCase(resetPasswordFN.rejected, (state, action) => {
       state.isError = true;
       state.isLoading = false;
       state.isSuccess = false;
       state.errorMsg = String(action.payload);
-      state.data = {} as IcheckResetCodeResponse;
+      state.data = {} as IResetPasswordResponse;
     });
   },
 });
 
-export const { resetData } = checkResetCodeSlice.actions;
+
+export const { resetData } = resetPasswordSLice.actions;

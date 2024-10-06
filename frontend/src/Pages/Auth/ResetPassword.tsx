@@ -6,14 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-// import { LoginFN } from "../../Redux/Slices/Auth/loginSLice";
-import { sendResetCodeFN } from "../../Redux/Slices/Auth/sendEmail";
-// import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
+import {
+  resetData,
+  resetPasswordFN,
+} from "../../Redux/Slices/Auth/resetPasswordSlice";
 
 const ResetPassword = () => {
   //   const [showPassword, setShowPassword] = useState(false);
-  const CheckResetCodeState = useSelector(
-    (state: RootState) => state.checkResetCode
+  const resetPasswordState = useSelector(
+    (state: RootState) => state.resetPasswordState
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -22,26 +24,27 @@ const ResetPassword = () => {
   //     setShowPassword((firstState) => !firstState);
   //   };
   useEffect(() => {
-    if (CheckResetCodeState.isSuccess) {
-      toast.success(CheckResetCodeState.data.msg);
-      console.log(CheckResetCodeState.data.msg);
+    if (resetPasswordState.isSuccess) {
+      toast.success(resetPasswordState.data.msg);
+      console.log(resetPasswordState.data.msg);
       navigate("/login");
+      dispatch(resetData());
     }
-    if (CheckResetCodeState.isError) {
-      console.log(CheckResetCodeState.errorMsg);
-      toast.error(CheckResetCodeState.errorMsg);
+    if (resetPasswordState.isError) {
+      console.log(resetPasswordState.errorMsg);
+      toast.error(resetPasswordState.errorMsg);
     }
-  }, [navigate, CheckResetCodeState]);
+  }, [dispatch, navigate, resetPasswordState]);
   const formik = useFormik({
     initialValues: {
-      clientEmail: "",
+      newPassword: "",
     },
     onSubmit(values) {
       //   console.log("submitd  " + values.username);
-      dispatch(sendResetCodeFN(values));
+      dispatch(resetPasswordFN(values));
     },
     validationSchema: yup.object({
-      clientEmail: yup
+      newPassword: yup
         .string()
         .required("enter your Email to send reset code "),
     }),
@@ -60,28 +63,28 @@ const ResetPassword = () => {
             Reset Your Password
           </label>
           <label htmlFor="" className="font-geist  text-[#38383b]">
-            create strong password
+            create strong password to secure your account
           </label>
         </div>
 
         <div className=" inputs w-[100%] flex flex-col gap-3">
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <h1 className="font-geist text-[1.1rem] font-medium text-[#38383c]">
-              Email
+              New Password
             </h1>
             <input
               type="text"
-              placeholder="Enter your Email"
-              name="clientEmail"
+              placeholder="Enter your New password"
+              name="newPassword"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.clientEmail}
+              value={formik.values.newPassword}
               className="py-3 font-geist rounded-[.4rem] text-black border-1 border-white bg-[#e2e7f369]  px-3 w-[100%]"
             />
             <p className="font-geist text-[13px] text-[#b00c0c]">
-              {formik.errors.clientEmail
-                ? formik.touched.clientEmail
-                  ? formik.errors.clientEmail
+              {formik.errors.newPassword
+                ? formik.touched.newPassword
+                  ? formik.errors.newPassword
                   : null
                 : null}
             </p>
@@ -92,12 +95,12 @@ const ResetPassword = () => {
               disabled={!formik.isValid}
               className="py-3 font-geist rounded-[.4rem]  border-1 text-white font-bold border-white bg-[#000000] hover:w-[95%] mx-auto duration-500   px-3 w-[100%]"
             >
-              Send Email
+              reset password
             </button>
           </div>
 
           <div className="signup flex  text-center w-[100%] justify-center items-center gap-2">
-            <p className="font-geist text-[14px] text-[#000]">l?</p>
+            <p className="font-geist text-[14px] text-[#000]">Remembered?</p>
             <Link
               className="font-geist text-[16px] text-[#000] border-b-2"
               to={"/auth/login"}

@@ -8,6 +8,7 @@ import SendResetCode from "./Pages/Auth/SendResetCode";
 import CheckResetCode from "./Pages/Auth/CHeckResetCode";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 import SignUp from "./Pages/Auth/SignUP";
+import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,12 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <MainComponent />,
-    children: [{ path: "/dashboard", element: <Dashboard /> }],
+    children: [
+      { path: "/dashboard", element: <Dashboard /> },
+      {
+        path: "create-evaluation",
+        element: <CreateEvaluation />,
+      },
+    ],
   },
 ]);

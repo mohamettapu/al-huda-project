@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../Redux/Slices/Auth/loginSLice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Redux/store";
@@ -13,7 +13,11 @@ const Sidebar = () => {
   return (
     <div className=" fixed px-3 flex flex-col justify-between border h-[97%] py-3  items-center  w-[280px] pt-6">
       <div className="la text-[#000] font-geist font-bold text-xl">al-huda</div>
-      <div className="links "></div>
+      <div className="links ">
+        <Link to={"create-evaluation"} className="text-[14px] font-geist">
+          Evaluation
+        </Link>
+      </div>
       <div className="logout">
         <button
           onClick={handleLogout}

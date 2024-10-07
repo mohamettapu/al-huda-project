@@ -4,6 +4,8 @@ import { sendResetCodeSlice } from "./Slices/Auth/sendEmail";
 import { checkResetCodeSlice } from "./Slices/Auth/checkResetCode";
 import { resetPasswordSLice } from "./Slices/Auth/resetPasswordSlice";
 import { signUpSlice } from "./Slices/Auth/signUpSlice";
+import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
+// import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,9 @@ export const store = configureStore({
     checkResetCode: checkResetCodeSlice.reducer,
     resetPasswordState: resetPasswordSLice.reducer,
     SingUpState: signUpSlice.reducer,
+
+    // evaluations
+    EvaluationSlice: EvaluationSlice.reducer,
   },
 });
 

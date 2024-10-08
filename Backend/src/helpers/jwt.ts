@@ -27,16 +27,16 @@ export const giveTokens = (
 
 export const giveNewAccesstoken = async (req: Request, res: Response) => {
   try {
-    const { refreshtokenn } = req.body;
+    const { refreshtoken } = req.body;
 
-    if (!refreshtokenn) {
-      return res.status(400).json({
+    if (!refreshtoken) {
+      return res.status(401).json({
         msg: "Refresh token is required",
       });
     }
 
     jwt.verify(
-      refreshtokenn,
+      refreshtoken,
       process.env.JWT_REFRESH_SECRET_KEY as string,
       async (error: any, decoded: any) => {
         if (error) {

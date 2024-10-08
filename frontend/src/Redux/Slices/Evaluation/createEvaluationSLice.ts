@@ -28,7 +28,7 @@ export const createEvaluationFN = createAsyncThunk(
         return rejectWithValue("No user info available");
       }
       const userInfo = JSON.parse(userInfoString);
-      const token = userInfo.token;
+      const token = userInfo.accessToken;
       if (!token) {
         return rejectWithValue("No access token");
       }
@@ -79,8 +79,6 @@ export const EvaluationSlice = createSlice({
       state.isError = false;
       state.errorMsg = "";
       state.data = action.payload;
-
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
     });
     builder.addCase(createEvaluationFN.rejected, (state, action) => {
       state.isError = true;

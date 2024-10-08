@@ -24,7 +24,7 @@ router.put("/update", authenticate, updateUser);
 router.post("/login", login);
 router.get("/me", whoAmI);
 router.get("/list-user", allUsers);
-router.get("/new-access-token", giveNewAccesstoken);
+router.post("/new-access-token", giveNewAccesstoken);
 router.put("/change-role", authenticate, authorize(["admin"]), changeRole);
 
 // Step 1: Send reset code to user's email

@@ -8,6 +8,8 @@ import SendResetCode from "./Pages/Auth/SendResetCode";
 import CheckResetCode from "./Pages/Auth/CHeckResetCode";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 import SignUp from "./Pages/Auth/SignUP";
+// import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
+import AddEvaluation from "./Redux/Slices/Evaluation/AddEvaluation";
 import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
 
 export const router = createBrowserRouter([
@@ -63,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "create-evaluation",
         element: <CreateEvaluation />,
+      },
+      {
+        path: "add-evaluation",
+        element: <AddEvaluation />,
       },
     ],
   },

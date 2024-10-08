@@ -39,6 +39,18 @@ export const createEvaluation = async (req: Request, res: Response) => {
         msg: `No teacher found with this phone: ${phone}`,
       });
     }
+
+    if (assessmentArea.length < 4) {
+      return res.status(400).json({
+        msg: "Full Evaluation required",
+      });
+    }
+    if (assessmentArea.length > 4) {
+      return res.status(400).json({
+        msg: "maximum Evaluation allowed is 4",
+      });
+    }
+
     if (
       !Array.isArray(assessmentArea) ||
       !Array.isArray(criteria) ||

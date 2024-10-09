@@ -368,23 +368,33 @@ export const updateEvaluation = async (req: Request, res: Response) => {
 export const listTeachersEvaluation = async (req: Request, res: Response) => {
   {
     try {
-      const teachers = await prisma.teacher.findMany({
+      const teachersEvalution = await prisma.evaluations.findMany({
         select: {
-          fullName: true,
-
-          evaluations: true,
+          teacher: {
+            select: {
+              fullName: true,
+              phone: true,
+            },
+          },
+          evaluation_No: true,
+          assessmentArea: true,
+          updatedAt: true,
+          criteria: true,
+          rating: true,
+          points: true,
+          createdAt: true,
         },
       });
 
-      if (!teachers || teachers.length === 0) {
+      if (!teachersEvalution || teachersEvalution.length === 0) {
         return res.status(404).json({
-          msg: "No teachers found.",
+          msg: "No teachersEvalution found.",
         });
       }
 
       return res.status(200).json({
         msg: "Evaluations fetched successfully.",
-        data: teachers,
+        data: teachersEvalution,
       });
     } catch (error) {
       console.error("Error fetching teacher evaluations: ", error);

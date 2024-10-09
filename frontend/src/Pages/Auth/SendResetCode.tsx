@@ -91,9 +91,13 @@ const SendResetCode = () => {
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <button
               disabled={!formik.isValid}
-              className="py-3 font-geist rounded-[.4rem]  border-1 text-white font-bold border-white bg-[#000000] hover:w-[95%] mx-auto duration-500   px-3 w-[100%]"
+              className="py-3 font-geist rounded-[.4rem]  text-center border-1 text-white font-bold border-white bg-[#000000] hover:w-[95%] mx-auto duration-500   px-3 w-[100%]"
             >
-              Send Reset Code
+              {SendResetCodeToEmailState.isLoading ? (
+                <span className="animate-pulse font-geist w-5 h-5 px-[9px] py-[0.px]  rounded-full bg-black border-4 text-center border-[#fff]"></span>
+              ) : (
+                <h1 className="text-white font-geist">send reset code</h1>
+              )}
             </button>
           </div>
 

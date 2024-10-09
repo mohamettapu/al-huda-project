@@ -45,3 +45,23 @@ export interface EvaluationResponse {
     pointsArray: number[];
   };
 }
+export interface IListEvaluations {
+  msg: string;
+  data: EvaluationResult[];
+}
+
+export interface EvaluationResult {
+  teacher: Teacher;
+  evaluation_No: string;
+  assessmentArea: string[];
+  updatedAt: Date;
+  criteria: string[];
+  rating: string[];
+  points: number[];
+  createdAt: Date;
+}
+
+export interface Teacher {
+  fullName: string;
+  phone: string;
+}

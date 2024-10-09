@@ -5,6 +5,7 @@ import { checkResetCodeSlice } from "./Slices/Auth/checkResetCode";
 import { resetPasswordSLice } from "./Slices/Auth/resetPasswordSlice";
 import { signUpSlice } from "./Slices/Auth/signUpSlice";
 import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
+import { listEvaluationSlice } from "./Slices/Evaluation/ListEvaluation";
 // import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
 
 export const store = configureStore({
@@ -17,6 +18,7 @@ export const store = configureStore({
 
     // evaluations
     EvaluationSlice: EvaluationSlice.reducer,
+    listEvaluations: listEvaluationSlice.reducer,
   },
 });
 

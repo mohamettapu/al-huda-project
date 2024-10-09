@@ -18,7 +18,7 @@ export const giveTokens = (
     payload,
     process.env.JWT_REFRESH_SECRET_KEY as string,
     {
-      expiresIn: "50m",
+      expiresIn: "55m",
     }
   );
 
@@ -54,7 +54,7 @@ export const giveNewAccesstoken = async (req: Request, res: Response) => {
           { userid: user.id },
           process.env.JWT_SECRET_KAY as string,
           {
-            expiresIn: "5m",
+            expiresIn: "1m",
           }
         );
         res.json({ NewAccessToken: newToken });

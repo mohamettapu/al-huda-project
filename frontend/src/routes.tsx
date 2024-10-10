@@ -11,6 +11,7 @@ import SignUp from "./Pages/Auth/SignUP";
 // import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
 import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
 import ListEvaluation from "./Pages/Evaluation/ListEvaluation";
+import UpdateEvaluation from "./Pages/Evaluation/UpdateEvaluation";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: "create-evaluation",
         element: <CreateEvaluation />,
+      },
+      {
+        path: "edit-evaluations",
+        element: <UpdateEvaluation />,
       },
 
       {

@@ -45,6 +45,8 @@ export interface EvaluationResponse {
     pointsArray: number[];
   };
 }
+
+// list of evaluation interfeces
 export interface IListEvaluations {
   msg: string;
   data: EvaluationResult[];
@@ -64,4 +66,35 @@ export interface EvaluationResult {
 export interface Teacher {
   fullName: string;
   phone: string;
+}
+
+// update evaluation interfaces
+export interface IUpdateEvaluationPayload {
+  phone: string;
+  evaluation_no: string;
+  assessmentArea: string[];
+  criteria: string[];
+  rating: string[];
+}
+export interface IUpdateEvaluationResponse {
+  msg: string;
+  data: Data;
+}
+
+export interface Data {
+  updateEvaluation: UpdateEvaluation;
+  pointsArray: number[];
+}
+
+export interface UpdateEvaluation {
+  id: number;
+  teacherId: number;
+  phone: string;
+  assessmentArea: string[];
+  criteria: string[];
+  rating: string[];
+  points: number[];
+  evaluation_No: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

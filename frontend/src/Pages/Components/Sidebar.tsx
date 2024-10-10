@@ -18,7 +18,13 @@ const Sidebar = () => {
           to={"create-evaluation"}
           className="text-[14px] font-geist font-bold"
         >
-          Evaluation
+          Add Evaluation
+        </Link>
+        <Link
+          to={"edit-evaluations"}
+          className="text-[14px] font-geist font-bold"
+        >
+          Edit Evaluation
         </Link>
         <Link
           to={"fetch-evaluations"}

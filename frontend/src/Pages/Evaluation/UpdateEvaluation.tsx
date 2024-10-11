@@ -14,6 +14,7 @@ import {
   resetData,
 } from "../../Redux/Slices/Evaluation/editEvaluation";
 import { useFormik } from "formik";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateEvaluation = () => {
   const [selectedArea, setSelectedArea] = useState<AssessmentArea | "">("");
@@ -41,18 +42,32 @@ const UpdateEvaluation = () => {
     (state: RootState) => state.editEvaluationSlice
   );
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state) {
+      const { phone, evaluation_no } = location.state;
+      setEditEvaluationData((prev) => ({
+        ...prev,
+        phone: phone || "",
+        evaluation_no: evaluation_no || "",
+      }));
+    }
+  }, [location.state]);
 
   useEffect(() => {
     if (UpdateEvaluationState.isSuccess) {
       toast.success(UpdateEvaluationState.data.msg || "successfuly updated");
       dispatch(resetData());
+      navigate("/dashboard/fetch-evaluations");
     }
 
     if (UpdateEvaluationState.isError) {
       toast.error(UpdateEvaluationState.errorMsg || "error");
       dispatch(resetData());
     }
-  }, [dispatch, UpdateEvaluationState]);
+  }, [dispatch, UpdateEvaluationState, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -178,6 +193,7 @@ const UpdateEvaluation = () => {
                 placeholder="Enter Evaluation number"
                 className="border w-full p-4 rounded-md font-geist hover:bg-[#b1c2f5] duration-500"
                 name="evaluation_no"
+                value={editEvaluationData.evaluation_no}
                 onChange={(e) =>
                   setEditEvaluationData((prev) => ({
                     ...prev,
@@ -187,9 +203,9 @@ const UpdateEvaluation = () => {
               />
 
               <p className="text-red-500">
-                {formik.touched.phone
-                  ? formik.errors.phone
-                    ? formik.errors.phone
+                {formik.touched.evaluation_no
+                  ? formik.errors.evaluation_no
+                    ? formik.errors.evaluation_no
                     : null
                   : null}
               </p>
@@ -257,7 +273,7 @@ const UpdateEvaluation = () => {
               </button>
             </div>
           </div>
-
+          {/* letter of evaluations  */}
           <div className="letter border-black border w-[48%]">
             <div className="labels">
               <h1>name:</h1>

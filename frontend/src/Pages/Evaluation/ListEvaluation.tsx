@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { useEffect, useState } from "react";
 import { listEvaluationFN } from "../../Redux/Slices/Evaluation/ListEvaluation";
+import { CiEdit } from "react-icons/ci";
 
 import { EvaluationResult } from "../../types/evaluationInterfaces";
+import { useNavigate } from "react-router-dom";
 
 const ListEvaluation = () => {
   const ListEvaluationState = useSelector(
@@ -11,6 +13,7 @@ const ListEvaluation = () => {
   );
   const [searchName, setsearchName] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(listEvaluationFN());
   }, [dispatch]);
@@ -30,6 +33,12 @@ const ListEvaluation = () => {
     ListEvaluationState.data.data.filter((teacher: EvaluationResult) =>
       teacher.teacher.fullName.includes(searchName)
     ) || [];
+
+  const handleEditClick = (evaluation_no: string, phone: string) => {
+    navigate("/dashboard/edit-evaluations", {
+      state: { evaluation_no, phone },
+    });
+  };
   return (
     <div className="w-full border">
       <div className="labels">
@@ -52,16 +61,29 @@ const ListEvaluation = () => {
             <tbody className=" flex   flex-wrap gap-2   justify-center   w-full ">
               {filterTeacher.map((teacher: EvaluationResult) => (
                 <div className="bg-[#679bf527] hover:bg-[#679bf59b] duration-500 w-[49.7%] p-8 h-[15rem] rounded-lg">
-                  <div className="">
-                    <h1 className=" font-geist font-bold text-lg">
-                      {teacher.teacher.fullName}
-                    </h1>
-                    <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
-                      {teacher.teacher.phone}
-                    </h1>
-                    <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
-                      {teacher.evaluation_No}
-                    </h1>
+                  <div className="flex items-center justify-between pr-5">
+                    <div className="lbl">
+                      <h1 className=" font-geist font-bold text-lg">
+                        {teacher.teacher.fullName}
+                      </h1>
+                      <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
+                        {teacher.teacher.phone}
+                      </h1>
+                      <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
+                        {teacher.evaluation_No}
+                      </h1>
+                    </div>
+                    <div className="edit bg-[#b8c1f7] p-1 rounded-full">
+                      <CiEdit
+                        onClick={() =>
+                          handleEditClick(
+                            teacher.evaluation_No,
+                            teacher.teacher.phone.replace(/\+252/g, "")
+                          )
+                        }
+                        className="text-[38px] bg-[#b9d3f7] hover:text-[40px] duration-300 shadow-lg rounded-full p-2"
+                      />
+                    </div>
                   </div>
 
                   <div className="eva flex  items-center  h-[80%] justify-between">

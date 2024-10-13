@@ -12,6 +12,9 @@ import SignUp from "./Pages/Auth/SignUP";
 import CreateEvaluation from "./Pages/Evaluation/CreateEvaluation";
 import ListEvaluation from "./Pages/Evaluation/ListEvaluation";
 import UpdateEvaluation from "./Pages/Evaluation/UpdateEvaluation";
+import CreateTeacher from "./Pages/Teacher/CreateTeacher";
+import UpdateTeacher from "./Pages/Teacher/UpdateTeacher";
+import ListTeacher from "./Pages/Teacher/ListTeacher";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +78,18 @@ export const router = createBrowserRouter([
       {
         path: "fetch-evaluations",
         element: <ListEvaluation />,
+      },
+      {
+        path: "create-teacher",
+        element: <CreateTeacher />,
+      },
+      {
+        path: "update-teacher",
+        element: <UpdateTeacher />,
+      },
+      {
+        path: "list-teacher",
+        element: <ListTeacher />,
       },
     ],
   },

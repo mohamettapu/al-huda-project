@@ -45,26 +45,21 @@ export const CreateTeacher = async (req: Request, res: Response) => {
 
 export const UpdateTeacher = async (req: Request, res: Response) => {
   try {
-    const { fullName, phone, id } = req.body as {
+    const { fullName, phone } = req.body as {
       fullName?: string;
       phone?: string;
-      id: number;
     };
-    if (typeof id !== "number") {
+
+    if (!fullName || !phone) {
       return res.status(400).json({
-        msg: "please provid valid id ",
-      });
-    }
-    if (!fullName || !phone || !id) {
-      return res.status(400).json({
-        msg: "provide id fullname and phone",
+        msg: "provide  fullname and phone",
       });
     }
     const countryCode = "+252";
     const fullPhone = `${countryCode}${phone}`;
     const teacherExist = await prisma.teacher.findFirst({
       where: {
-        id,
+        phone: fullPhone,
       },
     });
     if (!teacherExist) {
@@ -84,7 +79,7 @@ export const UpdateTeacher = async (req: Request, res: Response) => {
     });
 
     res.status(201).json({
-      msg: "Success",
+      msg: " updated Successfully",
       data: updateTeacher,
     });
   } catch (error) {

@@ -7,6 +7,9 @@ import { signUpSlice } from "./Slices/Auth/signUpSlice";
 import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
 import { listEvaluationSlice } from "./Slices/Evaluation/ListEvaluation";
 import { editEvaluationSlice } from "./Slices/Evaluation/editEvaluation";
+import { createTeacherSlice } from "./Slices/teacher/createTeacherSlice";
+import { updateTeacherSlice } from "./Slices/teacher/updateTeacherSlice";
+import { listTeacherSlice } from "./Slices/teacher/listTeacherSLice";
 // import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
 
 export const store = configureStore({
@@ -21,6 +24,11 @@ export const store = configureStore({
     EvaluationSlice: EvaluationSlice.reducer,
     listEvaluations: listEvaluationSlice.reducer,
     editEvaluationSlice: editEvaluationSlice.reducer,
+
+    // teacher slices
+    createTeacher: createTeacherSlice.reducer,
+    updateTeacher: updateTeacherSlice.reducer,
+    listTeacher: listTeacherSlice.reducer,
   },
 });
 

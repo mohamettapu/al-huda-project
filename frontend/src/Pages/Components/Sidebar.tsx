@@ -32,13 +32,30 @@ const Sidebar = () => {
         >
           Evaluation List
         </Link>
+        <Link
+          to={"create-teacher"}
+          className="text-[14px] font-geist font-bold"
+        >
+          add teacher
+        </Link>
+        <Link
+          to={"update-teacher"}
+          className="text-[14px] font-geist font-bold"
+        >
+          edit teacher
+        </Link>
+        <Link to={"list-teacher"} className="text-[14px] font-geist font-bold">
+          ListTeacher
+        </Link>
       </div>
-      <div className="logout">
+      <div className="logout bg-slate-300 h-[7rem] w-[90%] flex rounded-lg py-4 px-7 items-center justify-center hover:bg-[#dddff9] duration-500">
         <button
           onClick={handleLogout}
-          className="text-[14px] leading-5 flex gap-4 font-bold font-geist text-[#000000cc] hover:text-[#fafafae0] text-white"
+          className="text-[14px] leading-5 flex flex-col items-center gap-4 font-bold font-geist text-[#0a0dddcc]  "
         >
-          <PiHandWithdrawFill className={`text-black text-xl $`} />
+          <PiHandWithdrawFill
+            className={`text-[#1c10c3] bg-[#fff]  p-2 rounded-full w-10 h-10 text-xl $`}
+          />
           Logout
         </button>
       </div>

@@ -81,7 +81,7 @@ const ListEvaluation = () => {
                             teacher.teacher.phone.replace(/\+252/g, "")
                           )
                         }
-                        className="text-[38px] bg-[#b9d3f7] hover:text-[40px] duration-300 shadow-lg rounded-full p-2"
+                        className="text-[38px] cursor-pointer bg-[#b9d3f7] hover:text-[40px] duration-300 shadow-lg rounded-full p-2"
                       />
                     </div>
                   </div>

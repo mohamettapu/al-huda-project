@@ -14,6 +14,9 @@ const Sidebar = () => {
     <div className=" fixed px-3 flex flex-col justify-between border h-[97%] py-3  rounded-[1rem]  bg-[#F0F9FF] items-center  w-[240px] pt-6">
       <div className="la text-[#000] font-geist font-bold text-xl">al-huda</div>
       <div className="links flex flex-col gap-2 flex-grow px-3 py-5">
+        <Link to={"/dashboard"} className="text-[14px] font-geist font-bold">
+          Dashboard
+        </Link>
         <Link
           to={"create-evaluation"}
           className="text-[14px] font-geist font-bold"

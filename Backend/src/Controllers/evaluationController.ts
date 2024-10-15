@@ -40,14 +40,9 @@ export const createEvaluation = async (req: Request, res: Response) => {
       });
     }
 
-    if (assessmentArea.length < 4) {
+    if (assessmentArea.length !== 1) {
       return res.status(400).json({
-        msg: "Full Evaluation required",
-      });
-    }
-    if (assessmentArea.length > 4) {
-      return res.status(400).json({
-        msg: "maximum Evaluation allowed is 4",
+        msg: "maximum Evaluation allowed is 1",
       });
     }
 
@@ -96,62 +91,24 @@ export const createEvaluation = async (req: Request, res: Response) => {
         });
       }
     }
-    const pointsArray: number[] = [];
-
-    assessmentArea.forEach((area, index) => {
-      const currentRating = rating[index];
-      let point = 0;
-
-      switch (area) {
-        case "SUPERVISION_FEEDBACK":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
+    let point = 0;
+    rating.forEach((rate, index) => {
+      switch (rate) {
+        case "EXCEEDS_EXPECTATION":
+          point = 100;
           break;
-        case "ACADEMIC_PERFORMANCE":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
+        case "MEETS_EXPECTATION":
+          point = 80;
           break;
-        case "EXTERNAL_SUPERVISION":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
+        case "NEEDS_IMPROVEMENT":
+          point = 50;
           break;
-
-        case "STUDENT_FEEDBACK":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
+        case "UNSATISFACTORY":
+          point = 20;
           break;
         default:
           break;
       }
-      pointsArray.push(point);
     });
     const numberOfEvaluationOftheTeacher = await prisma.evaluations.count({
       where: {
@@ -166,7 +123,7 @@ export const createEvaluation = async (req: Request, res: Response) => {
         assessmentArea,
         criteria,
         rating,
-        points: pointsArray,
+        points: point,
         evaluation_No: (numberOfEvaluationOftheTeacher + 1).toString(),
       },
     });
@@ -175,7 +132,7 @@ export const createEvaluation = async (req: Request, res: Response) => {
       msg: "Evaluation created successfully",
       data: {
         evaluation,
-        pointsArray,
+        point,
       },
     });
   } catch (error) {
@@ -268,62 +225,29 @@ export const updateEvaluation = async (req: Request, res: Response) => {
         });
       }
     }
-    const pointsArray: number[] = [];
 
-    assessmentArea.forEach((area, index) => {
+    let point = 0;
+    rating.forEach((rate, index) => {
       const currentRating = rating[index];
-      let point = 0;
 
-      switch (area) {
-        case "SUPERVISION_FEEDBACK":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
-          break;
-        case "ACADEMIC_PERFORMANCE":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
-          break;
-        case "EXTERNAL_SUPERVISION":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
-          break;
+      switch (rate) {
+        case "EXCEEDS_EXPECTATION":
+          point = 100;
 
-        case "STUDENT_FEEDBACK":
-          if (currentRating === "EXCEEDS_EXPECTATION") {
-            point = 100;
-          } else if (currentRating === "MEETS_EXPECTATION") {
-            point = 80;
-          } else if (currentRating === "NEEDS_IMPROVEMENT") {
-            point = 50;
-          } else if (currentRating === "UNSATISFACTORY") {
-            point = 20;
-          }
+          break;
+        case "MEETS_EXPECTATION":
+          point = 80;
+          break;
+        case "NEEDS_IMPROVEMENT":
+          point = 50;
+
+          break;
+        case "UNSATISFACTORY":
+          point = 20;
           break;
         default:
           break;
       }
-      pointsArray.push(point);
     });
     const evaluations = await prisma.evaluations.findFirst({
       where: {
@@ -336,6 +260,7 @@ export const updateEvaluation = async (req: Request, res: Response) => {
         msg: "This Evaluation doesn't exist",
       });
     }
+    console.log(point);
     const updateEvaluation = await prisma.evaluations.update({
       where: {
         id: evaluations.id,
@@ -346,7 +271,7 @@ export const updateEvaluation = async (req: Request, res: Response) => {
         assessmentArea,
         criteria,
         rating,
-        points: pointsArray,
+        points: point,
       },
     });
 
@@ -354,7 +279,7 @@ export const updateEvaluation = async (req: Request, res: Response) => {
       msg: "Evaluation created successfully",
       data: {
         updateEvaluation,
-        pointsArray,
+        point,
       },
     });
   } catch (error) {

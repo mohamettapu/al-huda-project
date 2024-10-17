@@ -131,18 +131,18 @@ const CreateEvaluation: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-geist font-bold">Create Evaluation</h2>
+    <div className="p-0">
       <form
         onSubmit={formik.handleSubmit} // This submits the final accumulated data
-        className="flex  gap-7   w-full border border-black"
+        className="flex flex-col  justify-center items-center border-black   gap-7   w-full "
       >
-        <div className="main w-[50%] border border-black px-5 py-5 rounded-md">
-          <div className="inputContainers flex flex-col gap-2">
-            <div className="inputContainer">
+        <div className="main w-[45%] shadow flex flex-col bg-[#F0F9FF]  gap-3 items-center   px-10 py-5 rounded-xl">
+          <h2 className="text-4xl font-geist font-bold">Create Evaluation</h2>
+          <div className="inputContainers  w-[100%] p-5 flex flex-col gap-3">
+            <div className="inputContainer flex flex-col gap-1">
               <label
                 htmlFor="phone"
-                className="font-geist text-[17px] font-medium "
+                className="font-geist text-[20px] font-medium "
               >
                 Phone
               </label>
@@ -151,7 +151,7 @@ const CreateEvaluation: React.FC = () => {
                 name="phone"
                 type="text"
                 placeholder="Enter teacher phone number"
-                className="border w-full p-4 rounded-md font-geist shadow-md"
+                className=" w-full p-4 rounded-md xl border-l-2 border-slate-900 bg-[#e2e7f369] font-geist "
                 onChange={(e) =>
                   setEvaluationData((prev) => ({
                     ...prev,
@@ -168,12 +168,10 @@ const CreateEvaluation: React.FC = () => {
                   : null}
               </p>
             </div>
-            <div className="input">
-              <h1 className="font-geist text-[17px] font-medium ">
-                Assessment Areas
-              </h1>
+            <div className="input flex  flex-col gap-1">
+              <h1 className="font-geist text-[20px] font-medium ">Area</h1>
               <select
-                className="border w-full p-4 rounded-md font-geist shadow-md"
+                className=" w-full p-4 border-l-2 border-slate-900 rounded-md bg-[#e2e7f369] xl font-geist "
                 value={selectedArea}
                 onChange={handleAreaChange}
                 name="AssessmentArea"
@@ -187,20 +185,20 @@ const CreateEvaluation: React.FC = () => {
               </select>
             </div>
 
-            <div className="input">
-              <h1 className="font-geist text-[17px] font-medium ">Criteria</h1>
+            <div className="input flex flex-col gap-1">
+              <h1 className="font-geist text-[20px] font-medium ">Criteria</h1>
               <input
                 type="text"
                 readOnly
                 value={selectedCriteria}
-                className="border w-full p-4 rounded-md font-geist shadow-md"
+                className=" w-full p-4 rounded-md xl border-l-2 border-slate-900 bg-[#e2e7f369] font-geist "
               />
             </div>
 
-            <div className="input">
-              <h1 className="font-geist text-[17px] font-medium ">Rating</h1>
+            <div className="input flex flex-col gap-1">
+              <h1 className="font-geist text-[20px] font-medium ">Rating</h1>
               <select
-                className="border w-full p-4 rounded-md font-geist shadow-md"
+                className=" w-full p-4 border-l-2 border-slate-900 rounded-md bg-[#e2e7f369] xl font-geist "
                 value={selectedRating}
                 onChange={(e) => setSelectedRating(e.target.value as Rating)}
                 name="Rating"
@@ -213,11 +211,12 @@ const CreateEvaluation: React.FC = () => {
                 ))}
               </select>
             </div>
-
+          </div>
+          <div className="butn w-full px-4  ">
             <button
               type="button"
               onClick={handleAddToLetter}
-              className="bg-black text-white px-10 py-3 mt-2 rounded-md font-geist"
+              className="bg-black text-white px-10 py-3 mt-2 w-[100%] mx-auto rounded-md xl font-geist"
             >
               Add to Paper
             </button>
@@ -225,7 +224,7 @@ const CreateEvaluation: React.FC = () => {
         </div>
 
         {/* Display the letter of evaluation */}
-        <div className="letterOFTeacherEvaluation rounded-md mt-1 w-full p-4 border border-black flex flex-col items-baseline  bg-slate-900">
+        <div className="letterOFTeacherEvaluation rounded-md xl mt-1 w-full h-full p-4   flex flex-col items-baseline  bg-slate-900">
           <div className="info flex  justify-between w-full gap-1">
             <div className="labels">
               <h1 className="text-white font-geist text-xl">
@@ -251,7 +250,7 @@ const CreateEvaluation: React.FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-5 gap-3 items-center w-full   text-white  ">
-            <h1 className="text-xl font-geist">Assessment Areas</h1>
+            <h1 className="text-xl font-geist"> Areas</h1>
 
             <h1 className="text-xl font-geist">Criteria</h1>
             <h1 className="text-xl font-geist ml-8">Rating</h1>
@@ -262,7 +261,7 @@ const CreateEvaluation: React.FC = () => {
           {evaluationData.assessmentArea.map((area, index) => (
             <div
               key={index}
-              className="grid grid-cols-5 gap-10 items-center w-full py-3  rounded  border text-white "
+              className="grid grid-cols-5 gap-10 items-center w-full py-3  rounded-md px-2  border-2  border-slate-800 mt-2 text-white "
             >
               <p className="text-[14px] ">{area.toLowerCase()}</p>
 
@@ -284,7 +283,7 @@ const CreateEvaluation: React.FC = () => {
 
           <div className="butt">
             <button
-              className="bg-black font-geist text-white px-14 rounded py-2"
+              className="bg-slate-200 font-geist text-slate-900 font-bold mt-4 px-14 rounded-md py-2"
               type="submit" // Submit the form data
             >
               Submit

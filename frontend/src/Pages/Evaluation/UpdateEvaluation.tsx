@@ -98,15 +98,7 @@ const UpdateEvaluation = () => {
       case AssessmentArea.SUPERVISION_FEEDBACK:
         setSelectedCriteria(Criteria.INSTRUCTIONAL_STRATEGIES);
         break;
-      case AssessmentArea.ACADEMIC_PERFORMANCE:
-        setSelectedCriteria(Criteria.AVERAGE_CLASS_GRADES);
-        break;
-      case AssessmentArea.EXTERNAL_SUPERVISION:
-        setSelectedCriteria(Criteria.CLASSROOM_MANAGEMENT);
-        break;
-      case AssessmentArea.STUDENT_FEEDBACK:
-        setSelectedCriteria(Criteria.POSITIVE_STUDENT_INTERACTIONS);
-        break;
+
       default:
         setSelectedCriteria("");
     }
@@ -149,121 +141,122 @@ const UpdateEvaluation = () => {
   return (
     <div>
       <div className="all">
-        <div className="labels">
-          <h1 className="font-geist text-2xl ">Edit Evaluation</h1>
-        </div>
+        <div className="labels"></div>
 
         <form
           onSubmit={formik.handleSubmit}
-          className="main flex gap-4 justify-center"
+          className="main flex flex-col w-full items-center gap-4 justify-center"
         >
-          <div className="form w-[40%] border-black border  flex flex-col gap-2 px-12 pt-8 pb-6 rounded-lg">
-            <div className="inputContainer flex w-[100%] flex-col gap-2">
-              <h1 className="text-[18px] font-geist font-medium">
-                phone number
-              </h1>
-              <input
-                type="text"
-                placeholder="Enter teacher phone"
-                className="border w-full p-4 rounded-md font-geist hover:bg-[#b1c2f5] duration-500 "
-                name="phone"
-                onChange={(e) =>
-                  setEditEvaluationData((prev) => ({
-                    ...prev,
-                    phone: e.target.value,
-                  }))
-                }
-                value={editEvaluationData.phone}
-              />
+          <div className="form w-[60%] border-black  bg-[#F0F9FF]  flex flex-col justify-center items-center gap-5 px-12 pt-8 pb-6 rounded-lg">
+            <h1 className="font-geist text-3xl font-bold  ">Edit Evaluation</h1>
+            <div className="flex flex-row flex-wrap justify-start w-[100%] mx-auto gap-4 ">
+              <div className="inputContainer flex w-[48%] flex-col gap-2">
+                <h1 className="text-[20px] font-geist font-medium">
+                  phone number
+                </h1>
+                <input
+                  type="text"
+                  placeholder="Enter teacher phone"
+                  className="border w-full p-4 rounded-md font-geist bg-[#e2e7f369] duration-500 "
+                  name="phone"
+                  onChange={(e) =>
+                    setEditEvaluationData((prev) => ({
+                      ...prev,
+                      phone: e.target.value,
+                    }))
+                  }
+                  value={editEvaluationData.phone}
+                />
 
-              <p className="text-red-500">
-                {formik.touched.phone
-                  ? formik.errors.phone
+                <p className="text-red-500">
+                  {formik.touched.phone
                     ? formik.errors.phone
-                    : null
-                  : null}
-              </p>
-            </div>
-            <div className="inputContainer flex w-[100%] flex-col gap-2">
-              <h1 className="text-[18px] font-geist font-medium">
-                Evaluation number
-              </h1>
-              <input
-                type="text"
-                placeholder="Enter Evaluation number"
-                className="border w-full p-4 rounded-md font-geist hover:bg-[#b1c2f5] duration-500"
-                name="evaluation_no"
-                value={editEvaluationData.evaluation_no}
-                onChange={(e) =>
-                  setEditEvaluationData((prev) => ({
-                    ...prev,
-                    evaluation_no: e.target.value,
-                  }))
-                }
-              />
+                      ? formik.errors.phone
+                      : null
+                    : null}
+                </p>
+              </div>
+              <div className="inputContainer flex w-[48%] flex-col gap-2">
+                <h1 className="text-[20px] font-geist font-medium">
+                  Evaluation number
+                </h1>
+                <input
+                  type="text"
+                  placeholder="Enter Evaluation number"
+                  className="border w-full p-4 rounded-md font-geist bg-[#e2e7f369] duration-500"
+                  name="evaluation_no"
+                  value={editEvaluationData.evaluation_no}
+                  onChange={(e) =>
+                    setEditEvaluationData((prev) => ({
+                      ...prev,
+                      evaluation_no: e.target.value,
+                    }))
+                  }
+                />
 
-              <p className="text-red-500">
-                {formik.touched.evaluation_no
-                  ? formik.errors.evaluation_no
+                <p className="text-red-500">
+                  {formik.touched.evaluation_no
                     ? formik.errors.evaluation_no
-                    : null
-                  : null}
-              </p>
+                      ? formik.errors.evaluation_no
+                      : null
+                    : null}
+                </p>
+              </div>
+
+              <div className="flex w-[48%] flex-col gap-2">
+                <h1 className="text-[20px] font-geist font-medium">
+                  Assessment Area
+                </h1>
+
+                <select
+                  name="AssessmentArea"
+                  id=""
+                  value={selectedArea}
+                  onChange={handleAreaChange}
+                  className="border w-full p-4 rounded-md font-geist bg-[#e2e7f369] duration-500"
+                >
+                  <option value="">select area</option>
+                  {Object.values(AssessmentArea).map((area) => (
+                    <option className="text-black" value={area} key={area}>
+                      {area}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="inputContainer flex w-[48%] flex-col gap-2">
+                <h1 className="text-[20px] font-geist font-medium">Criteria</h1>
+                <input
+                  type="text"
+                  readOnly
+                  value={selectedCriteria}
+                  placeholder="Criteria"
+                  className="border w-full p-4 rounded-md  dura font-geist bg-[#e2e7f369] duration-500"
+                />
+
+                <p className="text-[#ed0909] text-xs">error</p>
+              </div>
+              <div className="flex w-[48%] flex-col gap-2">
+                <h1 className="text-[20px] font-geist font-medium">Rating</h1>
+
+                <select
+                  name="Rating"
+                  id=""
+                  value={selectedRating}
+                  onChange={(e) => setSelectedRating(e.target.value as Rating)}
+                  className="border w-full p-4 rounded-md font-geist bg-[#e2e7f369] duration-500"
+                >
+                  <option value="">select rating</option>
+                  {Object.values(Rating).map((rate) => (
+                    <option className="text-black" value={rate} key={rate}>
+                      {rate}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <div className="flex w-[100%] flex-col gap-2">
-              <h1 className="text-[18px] font-geist font-medium">
-                Assessment Area
-              </h1>
-
-              <select
-                name="AssessmentArea"
-                id=""
-                value={selectedArea}
-                onChange={handleAreaChange}
-                className="border w-full p-4 rounded-md font-geist hover:bg-[#b1c2f5] duration-500"
-              >
-                <option value="">select area</option>
-                {Object.values(AssessmentArea).map((area) => (
-                  <option className="text-black" value={area} key={area}>
-                    {area}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="inputContainer flex w-[100%] flex-col gap-2">
-              <h1 className="text-[18px] font-geist font-medium">Criteria</h1>
-              <input
-                type="text"
-                readOnly
-                value={selectedCriteria}
-                placeholder="Criteria"
-                className="border w-full p-4 rounded-md  dura font-geist hover:bg-[#b1c2f5] duration-500"
-              />
-
-              <p className="text-[#ed0909] text-xs">error</p>
-            </div>
-            <div className="flex w-[100%] flex-col gap-2">
-              <h1 className="text-[18px] font-geist font-medium">Rating</h1>
-
-              <select
-                name="Rating"
-                id=""
-                value={selectedRating}
-                onChange={(e) => setSelectedRating(e.target.value as Rating)}
-                className="border w-full p-4 rounded-md font-geist hover:bg-[#b1c2f5] duration-500"
-              >
-                <option value="">select rating</option>
-                {Object.values(Rating).map((rate) => (
-                  <option className="text-black" value={rate} key={rate}>
-                    {rate}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="button mt-4">
+            <div className="button mt-4 w-full">
               <button
                 type="button"
                 onClick={handleAddToLetter}
@@ -274,14 +267,18 @@ const UpdateEvaluation = () => {
             </div>
           </div>
           {/* letter of evaluations  */}
-          <div className="letter border-black border w-[48%]">
-            <div className="labels">
-              <h1>name:</h1>
-              <h1>phone:{editEvaluationData.phone}</h1>
-              <h1>phone:{editEvaluationData.evaluation_no}</h1>
+          <div className="letter border-black border w-[100%] bg-slate-900 text-slate-200 rounded-lg p-5">
+            <div className="labels flex flex-col gap-2">
+              <h1 className="font-geist font-bold">name:</h1>
+              <h1 className="font-geist font-bold">
+                phone | {editEvaluationData.phone}
+              </h1>
+              <h1 className="font-geist font-bold">
+                Evaluation no | {editEvaluationData.evaluation_no}
+              </h1>
             </div>
 
-            <div className="text-black">
+            <div className="text-slate-200">
               <div className="grid grid-cols-5 gap-3 items-center w-full    ">
                 <h1 className="text-xl font-geist">Assessment Areas</h1>
 
@@ -293,7 +290,7 @@ const UpdateEvaluation = () => {
               {editEvaluationData.assessmentArea.map((area, index) => (
                 <div
                   key={index}
-                  className="flex justify-between items-center  gap-10  px-5 w-full py-3  rounded  bg-slate-950  border text-white "
+                  className="grid grid-cols-5 gap-10 items-center w-full py-3  rounded-md px-2  border-2  border-slate-800 mt-2 text-white "
                 >
                   <p className="text-[14px]  flex-1">{area.toLowerCase()}</p>
 
@@ -315,7 +312,7 @@ const UpdateEvaluation = () => {
 
               <div className="butt">
                 <button
-                  className="bg-black font-geist text-white px-14 rounded py-2"
+                  className="bg-slate-200 font-geist text-slate-900 font-bold mt-4 px-14 rounded-md py-2"
                   type="submit" // Submit the form data
                 >
                   Submit

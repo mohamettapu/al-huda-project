@@ -109,11 +109,7 @@ const ListEvaluation = () => {
                       ))}
                     </h1>
                     <h1 className="flex flex-col justify-center h-full gap-3">
-                      {teacher.points.map((points, index) => (
-                        <h2 className="font-geist text-[14px] " key={index}>
-                          {points}%
-                        </h2>
-                      ))}
+                      {teacher.points}
                     </h1>
                   </div>
                 </div>

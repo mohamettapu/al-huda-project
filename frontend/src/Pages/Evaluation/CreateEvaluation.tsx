@@ -84,15 +84,7 @@ const CreateEvaluation: React.FC = () => {
       case AssessmentArea.SUPERVISION_FEEDBACK:
         setSelectedCriteria(Criteria.INSTRUCTIONAL_STRATEGIES);
         break;
-      case AssessmentArea.ACADEMIC_PERFORMANCE:
-        setSelectedCriteria(Criteria.AVERAGE_CLASS_GRADES);
-        break;
-      case AssessmentArea.EXTERNAL_SUPERVISION:
-        setSelectedCriteria(Criteria.CLASSROOM_MANAGEMENT);
-        break;
-      case AssessmentArea.STUDENT_FEEDBACK:
-        setSelectedCriteria(Criteria.POSITIVE_STUDENT_INTERACTIONS);
-        break;
+
       default:
         setSelectedCriteria("");
     }

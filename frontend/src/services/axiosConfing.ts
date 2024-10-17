@@ -52,6 +52,11 @@ apiClient.interceptors.response.use(
         }
       } catch (err) {
         console.error("Error during token refresh:", err);
+        if (axios.isAxiosError(err) && err.response?.status === 401) {
+          localStorage.removeItem("userInfo");
+          window.location.href = "/login";
+        }
+
         return Promise.reject(err);
       }
     }

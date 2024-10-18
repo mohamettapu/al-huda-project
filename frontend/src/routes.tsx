@@ -15,6 +15,7 @@ import UpdateEvaluation from "./Pages/Evaluation/UpdateEvaluation";
 import CreateTeacher from "./Pages/Teacher/CreateTeacher";
 import UpdateTeacher from "./Pages/Teacher/UpdateTeacher";
 import ListTeacher from "./Pages/Teacher/ListTeacher";
+import ProtectedRoutes from "./ProtectedRoute/ProtectedRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -63,33 +64,33 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <MainComponent />,
+    element: <ProtectedRoutes element={<MainComponent />} />,
     children: [
       { path: "/dashboard", element: <Dashboard /> },
       {
         path: "create-evaluation",
-        element: <CreateEvaluation />,
+        element: <ProtectedRoutes element={<CreateEvaluation />} />,
       },
       {
         path: "edit-evaluations",
-        element: <UpdateEvaluation />,
+        element: <ProtectedRoutes element={<UpdateEvaluation />} />,
       },
 
       {
         path: "fetch-evaluations",
-        element: <ListEvaluation />,
+        element: <ProtectedRoutes element={<ListEvaluation />} />,
       },
       {
         path: "create-teacher",
-        element: <CreateTeacher />,
+        element: <ProtectedRoutes element={<CreateTeacher />} />,
       },
       {
         path: "update-teacher",
-        element: <UpdateTeacher />,
+        element: <ProtectedRoutes element={<UpdateTeacher />} />,
       },
       {
         path: "list-teacher",
-        element: <ListTeacher />,
+        element: <ProtectedRoutes element={<ListTeacher />} />,
       },
     ],
   },

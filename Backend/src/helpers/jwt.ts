@@ -18,7 +18,7 @@ export const giveTokens = (
     payload,
     process.env.JWT_REFRESH_SECRET_KEY as string,
     {
-      expiresIn: "3m",
+      expiresIn: "7d",
     }
   );
 

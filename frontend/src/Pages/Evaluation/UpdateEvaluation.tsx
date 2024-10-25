@@ -234,7 +234,7 @@ const UpdateEvaluation = () => {
                   className="border w-full p-4 rounded-md  dura font-geist bg-[#e2e7f369] duration-500"
                 />
 
-                <p className="text-[#ed0909] text-xs">error</p>
+                {/* <p className="text-[#ed0909] text-xs">error</p> */}
               </div>
               <div className="flex w-[48%] flex-col gap-2">
                 <h1 className="text-[20px] font-geist font-medium">Rating</h1>
@@ -267,7 +267,7 @@ const UpdateEvaluation = () => {
             </div>
           </div>
           {/* letter of evaluations  */}
-          <div className="letter border-black border w-[100%] bg-slate-900 text-slate-200 rounded-lg p-5">
+          <div className="letter border-black border w-[100%] bg-black text-slate-200 rounded-lg p-5">
             <div className="labels flex flex-col gap-2">
               <h1 className="font-geist font-bold">name:</h1>
               <h1 className="font-geist font-bold">

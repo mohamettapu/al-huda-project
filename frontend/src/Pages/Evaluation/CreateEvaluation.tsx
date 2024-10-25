@@ -224,7 +224,7 @@ const CreateEvaluation: React.FC = () => {
         </div>
 
         {/* Display the letter of evaluation */}
-        <div className="letterOFTeacherEvaluation rounded-md xl mt-1 w-full h-full p-4   flex flex-col items-baseline  bg-slate-900">
+        <div className="letterOFTeacherEvaluation rounded-md xl mt-1 w-full h-full p-4   flex flex-col items-baseline bg-black">
           <div className="info flex  justify-between w-full gap-1">
             <div className="labels">
               <h1 className="text-white font-geist text-xl">

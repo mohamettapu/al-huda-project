@@ -44,7 +44,13 @@ const UpdateEvaluation = () => {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [setIsVisible]);
   useEffect(() => {
     if (location.state) {
       const { phone, evaluation_no } = location.state;
@@ -140,7 +146,11 @@ const UpdateEvaluation = () => {
   };
   return (
     <div>
-      <div className="all">
+      <div
+        className={`transition-opacity duration-1000 transform ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-56 opacity-0"
+        }`}
+      >
         <div className="labels"></div>
 
         <form

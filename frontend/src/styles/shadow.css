@@ -17,3 +17,40 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    width: 0;
+  }
+  to {
+    transform: translateX(0);
+    width: 100%;
+  }
+}
+
+.line-animatio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background-color: #00e823;
+  animation: slideIn 0.5s forwards;
+  z-index: 1000;
+}
+
+/* styles.css or your CSS file */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-animate {
+  animation: fadeIn 0.1s ease forwards; /* Adjust duration and timing as needed */
+}

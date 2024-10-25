@@ -11,7 +11,7 @@ import {
   EvaluationRequest,
   Rating,
 } from "../../types/evaluationInterfaces";
-
+import "../.././styles/shadow.css";
 import { FaTrash } from "react-icons/fa";
 import {
   createEvaluationFN,
@@ -22,11 +22,20 @@ const CreateEvaluation: React.FC = () => {
   const CreateEvaluationState = useSelector(
     (state: RootState) => state.EvaluationSlice
   );
+
   const dispatch = useDispatch<AppDispatch>();
 
   const [selectedArea, setSelectedArea] = useState<AssessmentArea | "">("");
   const [selectedCriteria, setSelectedCriteria] = useState<Criteria | "">("");
   const [selectedRating, setSelectedRating] = useState<Rating | "">("");
+
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [setIsVisible]);
 
   const [evaluationData, setEvaluationData] = useState<EvaluationRequest>({
     phone: "",
@@ -131,7 +140,11 @@ const CreateEvaluation: React.FC = () => {
   };
 
   return (
-    <div className="p-0">
+    <div
+      className={`p-0 transition-opacity duration-1000 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+      }`}
+    >
       <form
         onSubmit={formik.handleSubmit} // This submits the final accumulated data
         className="flex flex-col  justify-center items-center border-black   gap-7   w-full "

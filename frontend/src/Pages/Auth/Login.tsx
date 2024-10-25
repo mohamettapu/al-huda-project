@@ -11,6 +11,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const loginstate = useSelector((state: RootState) => state.login);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -22,7 +23,10 @@ const Login = () => {
     if (loginstate.isSuccess) {
       toast.success(loginstate.data.msg);
       console.log(loginstate.data.msg);
-      navigate("/dashboard");
+      setIsAnimating(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     }
     if (loginstate.isError) {
       console.log(loginstate.errorMsg);
@@ -45,6 +49,7 @@ const Login = () => {
   });
   return (
     <div className="  rounded-md mt-6 ">
+      {isAnimating && <div className="line-animation" />}
       <form
         onSubmit={formik.handleSubmit}
         className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[33%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"

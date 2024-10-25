@@ -12,6 +12,13 @@ const ListEvaluation = () => {
     (state: RootState) => state.listEvaluations
   );
   const [searchName, setsearchName] = useState<string>("");
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [setIsVisible]);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,7 +47,11 @@ const ListEvaluation = () => {
     });
   };
   return (
-    <div className="w-full border">
+    <div
+      className={`w-full border transition-opacity duration-1000 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-56 opacity-0"
+      }`}
+    >
       <div className="labels">
         <h1 className="text-black font-geist text-2xl font-bold border-l-2 border-black pl-2">
           {" "}

@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import "../.././styles/shadow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { createTeacherFN } from "../../Redux/Slices/teacher/createTeacherSlice";
@@ -13,7 +13,13 @@ const CreateTeacher = () => {
   const CreateTeacherState = useSelector(
     (state: RootState) => state.createTeacher
   );
-
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [setIsVisible]);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -43,7 +49,11 @@ const CreateTeacher = () => {
     }),
   });
   return (
-    <div className="  rounded-md mt-6 ">
+    <div
+      className={`rounded-md mt-6 transition-opacity duration-1000 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-56 opacity-0"
+      }`}
+    >
       <form
         onSubmit={formik.handleSubmit}
         className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[43%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"

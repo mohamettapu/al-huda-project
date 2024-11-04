@@ -39,7 +39,6 @@ const Login = () => {
       password: "",
     },
     onSubmit(values) {
-      console.log("submitd  " + values.username);
       dispatch(LoginFN(values));
     },
     validationSchema: yup.object({
@@ -132,6 +131,7 @@ const Login = () => {
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <button
               disabled={!formik.isValid}
+              type="submit"
               className="py-3 font-geist rounded-[.4rem]  border-1 text-white font-bold border-white bg-[#000000] hover:w-[95%] mx-auto duration-500   px-3 w-[100%]"
             >
               Sign In

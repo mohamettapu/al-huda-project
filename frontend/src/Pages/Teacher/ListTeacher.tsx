@@ -19,6 +19,7 @@ const ListTeacher = () => {
     );
   }
 
+  console.log("Full listTeacherSlice data:", listTeacherSlice.data.data.length);
   console.log("Full listTeacherSlice data:", listTeacherSlice.data);
 
   if (!listTeacherSlice.data.data) {
@@ -28,6 +29,7 @@ const ListTeacher = () => {
     listTeacherSlice.data.data.filter((teacher) =>
       teacher.fullName.includes(searchName)
     ) || [];
+  console.log(filterTeacher.length);
 
   return (
     <div className="w-full border">
@@ -61,8 +63,11 @@ const ListTeacher = () => {
                 </div>
               </div>
 
-              {filterTeacher.map((teacher) => (
-                <div className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg">
+              {filterTeacher.map((teacher, index) => (
+                <div
+                  key={index}
+                  className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg"
+                >
                   <div className="lbl grid grid-cols-3 justify-start items-center gap-9">
                     <h1 className=" font-geist font-bold text-lg">
                       {teacher.id}

@@ -58,7 +58,7 @@ export const createTeacherSlice = createSlice({
   name: "create/teacher Slice",
   initialState,
   reducers: {
-    resetData: (state) => {
+    resetCreateTeacherData: (state) => {
       state.data = {} as ICreateTeacherResponse;
       state.isLoading = false;
       state.isSuccess = false;
@@ -91,4 +91,4 @@ export const createTeacherSlice = createSlice({
   },
 });
 
-export const { resetData } = createTeacherSlice.actions;
+export const { resetCreateTeacherData } = createTeacherSlice.actions;

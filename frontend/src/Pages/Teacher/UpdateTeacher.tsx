@@ -24,6 +24,7 @@ const UpdateTeacher = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, [setIsVisible]);
+
   useEffect(() => {
     if (UpdateTeacherState.isSuccess) {
       toast.success(UpdateTeacherState.data.msg);
@@ -53,7 +54,9 @@ const UpdateTeacher = () => {
       if (cleanedUserphone === values.phone) {
         dispatch(UpdateTeacherFN(values));
       } else {
-        toast.error("Enter your phone number begin63");
+        toast.error(
+          "you can only update your info Enter your phone number begin 63"
+        );
       }
       //   console.log("submitd  " + values.phone);
     },

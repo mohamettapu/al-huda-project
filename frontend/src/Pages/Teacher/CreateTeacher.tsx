@@ -7,7 +7,10 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { createTeacherFN } from "../../Redux/Slices/teacher/createTeacherSlice";
+import {
+  createTeacherFN,
+  resetCreateTeacherData,
+} from "../../Redux/Slices/teacher/createTeacherSlice";
 
 const CreateTeacher = () => {
   const CreateTeacherState = useSelector(
@@ -28,12 +31,13 @@ const CreateTeacher = () => {
       toast.success(CreateTeacherState.data.msg);
       console.log(CreateTeacherState.data.msg);
       navigate("/dashboard");
+      dispatch(resetCreateTeacherData());
     }
     if (CreateTeacherState.isError) {
       console.log(CreateTeacherState.errorMsg);
       toast.error(CreateTeacherState.errorMsg);
     }
-  }, [navigate, CreateTeacherState]);
+  }, [navigate, dispatch, CreateTeacherState]);
   const formik = useFormik({
     initialValues: {
       fullName: "",

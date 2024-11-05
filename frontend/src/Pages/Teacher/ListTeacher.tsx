@@ -1,14 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { listTeacherFN } from "../../Redux/Slices/teacher/listTeacherSLice";
 import { PiListChecksFill } from "react-icons/pi";
-
+import { useReactToPrint } from "react-to-print";
 const ListTeacher = () => {
   const listTeacherSlice = useSelector((state: RootState) => state.listTeacher);
   const [searchName, setsearchName] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
+  const componentRef = useRef<HTMLDivElement>(null);
 
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+    documentTitle: "Teacher List",
+    onAfterPrint: () => console.log("Print complete"),
+  });
   useEffect(() => {
     dispatch(listTeacherFN());
   }, [dispatch]);
@@ -19,8 +25,8 @@ const ListTeacher = () => {
     );
   }
 
-  console.log("Full listTeacherSlice data:", listTeacherSlice.data.data.length);
-  console.log("Full listTeacherSlice data:", listTeacherSlice.data);
+  // console.log("Full listTeacherSlice data:", listTeacherSlice.data.data.length);
+  // console.log("Full listTeacherSlice data:", listTeacherSlice.data);
 
   if (!listTeacherSlice.data.data) {
     return <h1>there is no teacher list </h1>;
@@ -29,7 +35,7 @@ const ListTeacher = () => {
     listTeacherSlice.data.data.filter((teacher) =>
       teacher.fullName.includes(searchName)
     ) || [];
-  console.log(filterTeacher.length);
+  // console.log(filterTeacher.length);
 
   return (
     <div className="w-full border">
@@ -46,8 +52,14 @@ const ListTeacher = () => {
           placeholder="search by name..."
         />
       </div>
+      <button
+        onClick={() => handlePrint()}
+        className="bg-black font-geist font-bold text-white px-4 py-2 rounded-md mt-3"
+      >
+        Print Teacher List
+      </button>
 
-      <div className="mainList w-full">
+      <div className="mainList w-full " ref={componentRef}>
         <div className="table w-full">
           <table className="w-full  ">
             <tbody className=" flex   flex-wrap gap-2   justify-center   w-full ">
@@ -64,11 +76,11 @@ const ListTeacher = () => {
               </div>
 
               {filterTeacher.map((teacher, index) => (
-                <div
-                  key={index}
-                  className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg"
-                >
-                  <div className="lbl grid grid-cols-3 justify-start items-center gap-9">
+                <div className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg">
+                  <div
+                    key={index}
+                    className="lbl grid grid-cols-3 justify-start items-center gap-9"
+                  >
                     <h1 className=" font-geist font-bold text-lg">
                       {teacher.id}
                     </h1>

@@ -54,6 +54,9 @@ const Dashboard = () => {
   const navigateToEvaluationList = () => {
     navigate("/dashboard/fetch-evaluations");
   };
+  const navigateToUserList = () => {
+    navigate("/dashboard/fetch-users");
+  };
   const handleEditClick = (evaluation_no: string, phone: string) => {
     navigate("/dashboard/edit-evaluations", {
       state: { evaluation_no, phone },
@@ -100,7 +103,10 @@ const Dashboard = () => {
           </div>
 
           <div className="btn">
-            <button className="bg-black text-white font-geist hover:bg-[#000000dd] duration-700 font-bold py-2 px-4 rounded-md w-[10rem] ">
+            <button
+              onClick={navigateToUserList}
+              className="bg-black text-white font-geist hover:bg-[#000000dd] duration-700 font-bold py-2 px-4 rounded-md w-[10rem] "
+            >
               Manage
             </button>
           </div>

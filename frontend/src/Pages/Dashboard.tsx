@@ -5,13 +5,14 @@ import { AppDispatch, RootState } from "../Redux/store";
 import { listTeacherFN } from "../Redux/Slices/teacher/listTeacherSLice";
 import { FaPollH } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-
+import hellpng from "../../public/hello.png";
 import {
   listEvaluationFN,
   // listEvaluationSlice,
 } from "../Redux/Slices/Evaluation/ListEvaluation";
 import { Link, useNavigate } from "react-router-dom";
 import { userListFN } from "../Redux/Slices/users/userListSlice";
+import { CiEdit } from "react-icons/ci";
 const Dashboard = () => {
   const [isVisible, setIsVisible] = useState(false);
   const logiState = useSelector((state: RootState) => state.login);
@@ -53,6 +54,11 @@ const Dashboard = () => {
   const navigateToEvaluationList = () => {
     navigate("/dashboard/fetch-evaluations");
   };
+  const handleEditClick = (evaluation_no: string, phone: string) => {
+    navigate("/dashboard/edit-evaluations", {
+      state: { evaluation_no, phone },
+    });
+  };
   return (
     <div
       className={`text-black ${
@@ -69,7 +75,13 @@ const Dashboard = () => {
               its good to see you again
             </h2>
           </div>
-          <div className="icon">icon</div>
+          <div className="icon ">
+            <img
+              className="w-60  mb-8 h-50 p-4 rounded-full"
+              src={hellpng}
+              alt=""
+            />
+          </div>
         </div>
         <div className="bg-slate-200 h-[5rem] rounded-lg flex justify-between items-center gap-4 px-5">
           <div className="desc flex gap-2">
@@ -79,7 +91,7 @@ const Dashboard = () => {
             "
             >
               <h1 className="text-black font-bold font-geist">
-                {countUser == 1 ? `${countUser} user` : `${countUser} users`}
+                {countUser === 1 ? `${countUser} user` : `${countUser} users`}
               </h1>
               <h3 className="text-[#131313c7] font-geist text-xs font-medium">
                 user that use the system
@@ -93,7 +105,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <div className="bg-slate-300 h-full rounded-lg  flex flex-col items-start justify-start ">
+        <div className=" h-full rounded-lg mt-3 gap-4 flex flex-col items-start justify-start ">
           <div className="labels">
             <h1 className="text-[15px] font-bold font-geist">
               Last Evaluations
@@ -102,7 +114,7 @@ const Dashboard = () => {
           <ul className="flex flex-col w-full gap-3">
             {ListEvaluationState.data?.data?.map((eva, index) => (
               <div
-                className="flex text-xs w-full justify-between gap-6 px-3 py-6  border bg-slate-200 rounded-md"
+                className="flex border-l-2  border-l-black  text-xs w-full items-center justify-between gap-6 px-3 py-6  border bg-slate-200 rounded-md"
                 key={index}
               >
                 <li>{eva.teacher.fullName.split(" ")[0]}</li>
@@ -110,7 +122,17 @@ const Dashboard = () => {
                 <li>{eva.criteria}</li>
                 <li>{eva.rating}</li>
                 <li>{eva.points}</li>
-                <li></li>
+                <h1>
+                  <CiEdit
+                    className="bg-black text-white w-7 h-7 rounded-md p-1 cursor-pointer"
+                    onClick={() =>
+                      handleEditClick(
+                        eva.evaluation_No,
+                        eva.teacher.phone.replace(/\+252/g, "")
+                      )
+                    }
+                  />
+                </h1>
               </div>
             ))}
           </ul>

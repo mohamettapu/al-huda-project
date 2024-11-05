@@ -61,8 +61,8 @@ const UpdateTeacher = () => {
       //   console.log("submitd  " + values.phone);
     },
     validationSchema: yup.object({
-      fullName: yup.string().required("enter fullname of teacher "),
-      phone: yup.string().required("teacher phone is required"),
+      fullName: yup.string().required("enter your fullname "),
+      phone: yup.string().required("your phone is required"),
     }),
   });
   return (
@@ -94,7 +94,7 @@ const UpdateTeacher = () => {
             </h1>
             <input
               type="text"
-              placeholder="Enter teacher Full Name"
+              placeholder="Enter your Full Name"
               name="fullName"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -118,7 +118,7 @@ const UpdateTeacher = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="phone"
-              placeholder="Enter teacher phone"
+              placeholder="Enter your phone"
               value={formik.values.phone}
               className="py-3 font-geist rounded-[.4rem] text-black border-1 border-white bg-[#e2e7f384]  px-3 w-[100%]"
             />

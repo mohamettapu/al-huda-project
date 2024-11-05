@@ -46,7 +46,7 @@ const ChangeRole = ({
           Are you sure you want to change role {phone}
         </p>
         <select
-          className="bg-slate-200 w-full py-4 text-xl px-3 rounded-lg mb-4"
+          className="bg-slate-200 w-full py-4 text-xl px-3 font-geist rounded-lg mb-4"
           name=""
           value={role}
           onChange={(e) => setRole(e.target.value)}
@@ -61,7 +61,7 @@ const ChangeRole = ({
             type="button"
             onClick={() => {
               handleChangeRole();
-              setIsOpen(false);
+              setIsOpen(changeRoleState.isLoading);
             }}
             className="bg-black text-white py-2 px-4 rounded font-geist    hover:bg-red-700"
           >

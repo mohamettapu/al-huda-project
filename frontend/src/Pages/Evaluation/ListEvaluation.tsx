@@ -48,7 +48,7 @@ const ListEvaluation = () => {
   };
   return (
     <div
-      className={`w-full border transition-opacity duration-1000 transform ${
+      className={`w-full border transition-opacity duration-1000  transform ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-56 opacity-0"
       }`}
     >
@@ -61,30 +61,30 @@ const ListEvaluation = () => {
           type="text"
           onChange={(e) => setsearchName(e.target.value)}
           value={searchName}
-          className="text-[14px] leading-5 font-normal my-4 font-geist py-2 px-10 w-72 rounded-[6px]  duration-300 border-2 border-[#768df46d]  text-[#000000] bg-[#7bb8f530]  hover:bg-[#ffffff31]"
+          className="bg-slate-200 rounded-lg py-2 my-5 font-geist text-black border border-[#0000001c] px-3 w-[20rem]"
           placeholder="search by name..."
         />
       </div>
 
-      <div className="mainList w-full">
+      <div className="mainList w-full  flex items-center h-full">
         <div className="table w-full">
-          <table className="w-full  ">
-            <tbody className=" flex   flex-wrap gap-2   justify-center   w-full ">
+          <table className="w-full border ">
+            <tbody className=" grid grid-cols-3 gap-2  flex-wrap   justify-start   w-full ">
               {filterTeacher.map((teacher: EvaluationResult) => (
-                <div className="bg-[#679bf527] hover:bg-[#679bf59b] duration-500 w-[49.7%] p-8 h-[15rem] rounded-lg">
-                  <div className="flex items-center justify-between pr-5">
-                    <div className="lbl">
-                      <h1 className=" font-geist font-bold text-lg">
+                <div className="bg-slate-300 hover:bg-slate-200 duration-500   p-5 flex flex-col gap-4  rounded-lg">
+                  <div className="flex items-center justify-between  ">
+                    <div className="lbl flex flex-col gap-1">
+                      <h1 className=" font-geist font-bold  text-xs">
                         {teacher.teacher.fullName}
                       </h1>
                       <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
                         {teacher.teacher.phone}
                       </h1>
-                      <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
-                        {teacher.evaluation_No}
-                      </h1>
                     </div>
-                    <div className="edit bg-[#b8c1f7] p-1 rounded-full">
+                    <div className="edit  p-1 rounded-full flex items-center gap-4">
+                      <h1 className="  font-geist font-semibold leading-4 text-[16px]">
+                        evaluation number {teacher.evaluation_No}
+                      </h1>
                       <CiEdit
                         onClick={() =>
                           handleEditClick(
@@ -92,12 +92,12 @@ const ListEvaluation = () => {
                             teacher.teacher.phone.replace(/\+252/g, "")
                           )
                         }
-                        className="text-[38px] cursor-pointer bg-[#b9d3f7] hover:text-[40px] duration-300 shadow-lg rounded-full p-2"
+                        className="bg-black text-white w-7 h-7 rounded-md p-1 cursor-pointer"
                       />
                     </div>
                   </div>
 
-                  <div className="eva flex  items-center  h-[80%] justify-between">
+                  <div className="flex items-center justify-between  ">
                     <h1 className="flex flex-col justify-center h-full gap-3 ">
                       {teacher.assessmentArea.map((area, index) => (
                         <h2 className="font-geist text-[14px] " key={index}>

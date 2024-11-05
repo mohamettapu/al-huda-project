@@ -36,13 +36,13 @@ const ListTeacher = () => {
       <div className="labels">
         <h1 className="text-black font-geist text-3xl font-bold border-black pl-2 flex items-center gap-3">
           <PiListChecksFill className="text-2xl bg-black text-white  p-1 rounded-md w-7 h-7" />{" "}
-          Evaluation List
+          Teacher Information
         </h1>
         <input
           type="text"
           onChange={(e) => setsearchName(e.target.value)}
           value={searchName}
-          className="text-[14px] leading-5 font-normal my-4 font-geist py-2 px-10 w-72 rounded-[6px]  duration-300 border-2 border-[#00000027]  text-[#000000] bg-[#ffffff]  hover:bg-[#ffffff31]"
+          className="bg-slate-200 rounded-lg py-2 font-geist mt-3 text-black border border-[#0000001c] px-3 w-[20rem]"
           placeholder="search by name..."
         />
       </div>

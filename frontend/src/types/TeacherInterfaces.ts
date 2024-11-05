@@ -28,10 +28,10 @@ export interface Data {
 }
 export interface IListTeacherResult {
   msg: string;
-  data: result[];
+  data: TeacherResult[];
 }
 
-export interface result {
+export interface TeacherResult {
   id: number;
   fullName: string;
   phone: string;

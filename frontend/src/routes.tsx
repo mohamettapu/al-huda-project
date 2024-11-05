@@ -17,6 +17,8 @@ import UpdateTeacher from "./Pages/Teacher/UpdateTeacher";
 import ListTeacher from "./Pages/Teacher/ListTeacher";
 import ProtectedRoutes from "./ProtectedRoute/ProtectedRoutes";
 import UserList from "./Pages/userList/UserList";
+import EvalutionReport from "./Report/EvalutionReport";
+import TeacherReport from "./Report/ReportTeacher";
 
 export const router = createBrowserRouter([
   {
@@ -96,6 +98,14 @@ export const router = createBrowserRouter([
       {
         path: "fetch-users",
         element: <ProtectedRoutes element={<UserList />} />,
+      },
+      {
+        path: "evaluation-report",
+        element: <ProtectedRoutes element={<EvalutionReport />} />,
+      },
+      {
+        path: "teacher-report",
+        element: <ProtectedRoutes element={<TeacherReport />} />,
       },
     ],
   },

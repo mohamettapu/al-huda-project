@@ -1,14 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../Redux/store";
-import { useEffect, useState } from "react";
-import { listTeacherFN } from "../../Redux/Slices/teacher/listTeacherSLice";
-import { PiListChecksFill } from "react-icons/pi";
 
-const ListTeacher = () => {
+import { useEffect, useRef, useState } from "react";
+
+import { PiListChecksFill } from "react-icons/pi";
+import { useReactToPrint } from "react-to-print";
+import { TeacherResult } from "../types/TeacherInterfaces";
+import { listTeacherFN } from "../Redux/Slices/teacher/listTeacherSLice";
+import { AppDispatch, RootState } from "../Redux/store";
+const ReportTeacher = () => {
   const listTeacherSlice = useSelector((state: RootState) => state.listTeacher);
   const [searchName, setsearchName] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
+  const componentRef = useRef<HTMLDivElement>(null);
 
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+    documentTitle: "Teacher List",
+    onAfterPrint: () => console.log("Print complete"),
+  });
   useEffect(() => {
     dispatch(listTeacherFN());
   }, [dispatch]);
@@ -20,13 +29,13 @@ const ListTeacher = () => {
   }
 
   // console.log("Full listTeacherSlice data:", listTeacherSlice.data.data.length);
-  console.log("Full listTeacherSlice data:", listTeacherSlice.data);
+  // console.log("Full listTeacherSlice data:", listTeacherSlice.data);
 
   if (!listTeacherSlice.data.data) {
     return <h1>there is no teacher list </h1>;
   }
   const filterTeacher =
-    listTeacherSlice.data.data.filter((teacher) =>
+    listTeacherSlice.data.data.filter((teacher: TeacherResult) =>
       teacher.fullName.includes(searchName)
     ) || [];
   // console.log(filterTeacher.length);
@@ -47,13 +56,13 @@ const ListTeacher = () => {
         />
       </div>
       <button
-        // onClick={() => handlePrint()}
+        onClick={() => handlePrint()}
         className="bg-black font-geist font-bold text-white px-4 py-2 rounded-md mt-3"
       >
         Print Teacher List
       </button>
 
-      <div className="mainList w-full ">
+      <div className="mainList w-full " ref={componentRef}>
         <div className="table w-full">
           <table className="w-full  ">
             <tbody className=" flex   flex-wrap gap-2   justify-center   w-full ">
@@ -69,7 +78,7 @@ const ListTeacher = () => {
                 </div>
               </div>
 
-              {filterTeacher.map((teacher, index) => (
+              {filterTeacher.map((teacher: TeacherResult, index: number) => (
                 <div className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg">
                   <div
                     key={index}
@@ -91,9 +100,8 @@ const ListTeacher = () => {
           </table>
         </div>
       </div>
-      <div style={{ display: "none" }}></div>
     </div>
   );
 };
 
-export default ListTeacher;
+export default ReportTeacher;

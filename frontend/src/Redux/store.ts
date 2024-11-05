@@ -10,6 +10,8 @@ import { editEvaluationSlice } from "./Slices/Evaluation/editEvaluation";
 import { createTeacherSlice } from "./Slices/teacher/createTeacherSlice";
 import { updateTeacherSlice } from "./Slices/teacher/updateTeacherSlice";
 import { listTeacherSlice } from "./Slices/teacher/listTeacherSLice";
+import { userListSlace } from "./Slices/users/userListSlice";
+import { updateRoleSLice } from "./Slices/users/changeRole";
 // import { EvaluationSlice } from "./Slices/Evaluation/createEvaluationSLice";
 
 export const store = configureStore({
@@ -29,6 +31,9 @@ export const store = configureStore({
     createTeacher: createTeacherSlice.reducer,
     updateTeacher: updateTeacherSlice.reducer,
     listTeacher: listTeacherSlice.reducer,
+    // user list
+    listUser: userListSlace.reducer,
+    changeRole: updateRoleSLice.reducer,
   },
 });
 

@@ -220,7 +220,17 @@ export const whoAmI = async (req: Request, res: Response) => {
 };
 export const allUsers = async (req: Request, res: Response) => {
   try {
-    const users = await prisma.users.findMany({});
+    const users = await prisma.users.findMany({
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        username: true,
+        email: true,
+        phone: true,
+        role: true,
+      },
+    });
 
     if (!users) {
       return res.status(404).json({
@@ -242,26 +252,34 @@ export const allUsers = async (req: Request, res: Response) => {
 
 export const changeRole = async (req: Request, res: Response) => {
   try {
-    const { userid, role } = req.body as { userid: number; role: role };
+    const { phone, role } = req.body as { phone: string; role: role };
     // @ts-ignore
     const id = req.user.id;
-    if (!userid || !role) {
+    if (!phone || !role) {
       return res.status(400).json({
-        msg: "please provide userid and role",
+        msg: "please provide phone and role",
       });
     }
+    const countryCode = `+252`;
+    const fullPhone = `${countryCode}${phone}`;
     const checkUser = await prisma.users.findFirst({
       where: {
-        id: userid,
+        phone: fullPhone,
       },
     });
 
-    // check if user is updating its role
-    if (id === userid) {
-      return res.status(400).json({
-        msg: "sorry you can't update your role",
-      });
-    }
+    // const whoIsUpdating=await prisma.users.findFirst({
+    //   where:{
+    //     id
+    //   }
+    // })
+    // if(!whoIsUpdating)
+    // {
+    //   return res.status(401).json({
+    //     msg:"un authorized"
+    //   })
+    // }
+
     // check if user no found
 
     if (!checkUser) {
@@ -270,9 +288,15 @@ export const changeRole = async (req: Request, res: Response) => {
       });
     }
 
+    if (id === checkUser.id) {
+      return res.status(400).json({
+        msg: "you can't change you role",
+      });
+    }
+
     const updateRole = await prisma.users.update({
       where: {
-        id: userid,
+        id: checkUser.id,
       },
       data: {
         role: role,

@@ -23,7 +23,7 @@ router.post("/create-user", createUser);
 router.put("/update", authenticate, updateUser);
 router.post("/login", login);
 router.get("/me", whoAmI);
-router.get("/list-user", allUsers);
+router.get("/list-user", authenticate, allUsers);
 router.post("/new-access-token", giveNewAccesstoken);
 router.put("/change-role", authenticate, authorize(["admin"]), changeRole);
 

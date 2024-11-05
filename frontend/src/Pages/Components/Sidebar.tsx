@@ -7,6 +7,7 @@ import { RxDashboard } from "react-icons/rx";
 import { FaPollH } from "react-icons/fa";
 import { RiEditBoxFill } from "react-icons/ri";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
+import { FaCircleUser } from "react-icons/fa6";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -30,6 +31,13 @@ const Sidebar = () => {
         >
           <RxDashboard className="text-xl bg-black text-white  p-1 rounded-md w-7 h-7" />
           Dashboard
+        </Link>
+        <Link
+          to={"fetch-users"}
+          className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
+        >
+          <FaCircleUser className="text-xl bg-black text-white  p-1 rounded-md w-7 h-7" />
+          users
         </Link>
         <Link
           to={"create-evaluation"}

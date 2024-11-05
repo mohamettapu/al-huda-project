@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/store";
 import { listTeacherFN } from "../Redux/Slices/teacher/listTeacherSLice";
 import { FaPollH } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
+
 import {
   listEvaluationFN,
   // listEvaluationSlice,
 } from "../Redux/Slices/Evaluation/ListEvaluation";
 import { Link, useNavigate } from "react-router-dom";
+import { userListFN } from "../Redux/Slices/users/userListSlice";
 const Dashboard = () => {
   const [isVisible, setIsVisible] = useState(false);
   const logiState = useSelector((state: RootState) => state.login);
@@ -17,12 +20,14 @@ const Dashboard = () => {
   const ListEvaluationState = useSelector(
     (state: RootState) => state.listEvaluations
   );
+  const userListState = useSelector((state: RootState) => state.listUser);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   useEffect(() => {
     setIsVisible(true);
     dispatch(listTeacherFN());
     dispatch(listEvaluationFN());
+    dispatch(userListFN());
     console.log(logiState.data);
     return () => setIsVisible(false);
   }, [setIsVisible, dispatch, logiState]);
@@ -38,12 +43,13 @@ const Dashboard = () => {
   console.log("teachers array", t);
   console.log("evaluation array", e);
 
-  const countEvaluationTeachersNotTakedYet =
-    Number(t?.length) - Number(e?.length);
+  // const countEvaluationTeachersNotTakedYet =
+  //   Number(t?.length) - Number(e?.length);
   // console.log("Teachers Array:", teacher);
   const firstName = teacher ? teacher.fullName.split(" ")[0] : "guest";
   const countEvaluation = ListEvaluationState.data?.data?.length || 0;
   const countTeacher = listTeacherSlice.data?.data?.length || 0;
+  const countUser = userListState.data?.data?.length || 0;
   const navigateToEvaluationList = () => {
     navigate("/dashboard/fetch-evaluations");
   };
@@ -65,6 +71,28 @@ const Dashboard = () => {
           </div>
           <div className="icon">icon</div>
         </div>
+        <div className="bg-slate-200 h-[5rem] rounded-lg flex justify-between items-center gap-4 px-5">
+          <div className="desc flex gap-2">
+            <FaCircleUser className="text-4xl font-bold" />
+            <div
+              className="flex flex-col
+            "
+            >
+              <h1 className="text-black font-bold font-geist">
+                {countUser == 1 ? `${countUser} user` : `${countUser} users`}
+              </h1>
+              <h3 className="text-[#131313c7] font-geist text-xs font-medium">
+                user that use the system
+              </h3>
+            </div>
+          </div>
+
+          <div className="btn">
+            <button className="bg-black text-white font-geist hover:bg-[#000000dd] duration-700 font-bold py-2 px-4 rounded-md w-[10rem] ">
+              Manage
+            </button>
+          </div>
+        </div>
         <div className="bg-slate-300 h-full rounded-lg  flex flex-col items-start justify-start ">
           <div className="labels">
             <h1 className="text-[15px] font-bold font-geist">
@@ -74,7 +102,7 @@ const Dashboard = () => {
           <ul className="flex flex-col w-full gap-3">
             {ListEvaluationState.data?.data?.map((eva, index) => (
               <div
-                className="flex text-xs w-full justify-between gap-6 px-3 py-4 border rounded-lg"
+                className="flex text-xs w-full justify-between gap-6 px-3 py-6  border bg-slate-200 rounded-md"
                 key={index}
               >
                 <li>{eva.teacher.fullName.split(" ")[0]}</li>
@@ -82,6 +110,7 @@ const Dashboard = () => {
                 <li>{eva.criteria}</li>
                 <li>{eva.rating}</li>
                 <li>{eva.points}</li>
+                <li></li>
               </div>
             ))}
           </ul>

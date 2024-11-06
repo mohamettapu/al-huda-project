@@ -79,21 +79,21 @@ const ReportTeacher = () => {
               </div>
 
               {filterTeacher.map((teacher: TeacherResult, index: number) => (
-                <div className="hover:bg-[#d5e7f3] duration-500 w-[99.7%] px-4 border-b border-[#1a1d1f29]  rounded-lg">
-                  <div
+                <div className="hover:bg-[#d5e7f3] duration-500  flex-col flex w-[99.7%] gap-8 px-4 border-b border-[#1478ba29]  rounded-lg">
+                  <tr
                     key={index}
-                    className="lbl grid grid-cols-3 justify-start items-center gap-9"
+                    className="lbl grid grid-cols-3 justify-start border-black border  text-center items-center gap-9"
                   >
-                    <h1 className=" font-geist font-bold text-lg">
+                    <td className=" font-geist font-bold text-lg border-r border-black">
                       {teacher.id}
-                    </h1>
-                    <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
+                    </td>
+                    <td className=" font-geist font-bold text-lg border-r border-black">
                       {teacher.fullName}
-                    </h1>
-                    <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
+                    </td>
+                    <td className=" font-geist font-bold text-lg ">
                       {teacher.phone.replace("+252", "+252     ")}
-                    </h1>
-                  </div>
+                    </td>
+                  </tr>
                 </div>
               ))}
             </tbody>

@@ -56,6 +56,9 @@ const CreateEvaluation: React.FC = () => {
     if (CreateEvaluationState.isSuccess) {
       toast.success(CreateEvaluationState.data.msg);
       dispatch(resetData());
+      setSelectedArea("");
+      setSelectedCriteria("");
+      setSelectedRating("");
     }
     if (CreateEvaluationState.isError) {
       toast.error(CreateEvaluationState.errorMsg);
@@ -79,6 +82,13 @@ const CreateEvaluation: React.FC = () => {
       };
       console.log(values);
       dispatch(createEvaluationFN(finalEvaluationData));
+      formik.resetForm();
+      setEvaluationData({
+        phone: "",
+        assessmentArea: [],
+        criteria: [],
+        rating: [],
+      });
     },
     validationSchema: yup.object({
       phone: yup.string(),

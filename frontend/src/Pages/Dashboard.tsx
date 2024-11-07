@@ -3,8 +3,10 @@ import "../.././src/styles/shadow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/store";
 import { listTeacherFN } from "../Redux/Slices/teacher/listTeacherSLice";
-import { FaPollH } from "react-icons/fa";
+import { FaPollH, FaUserTie } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
+import { ImPhone } from "react-icons/im";
+
 import hellpng from "../../public/hello.png";
 import {
   listEvaluationFN,
@@ -117,34 +119,49 @@ const Dashboard = () => {
               Last Evaluations
             </h1>
           </div>
-          <ul className="flex flex-col w-full gap-3">
-            {ListEvaluationState.data?.data?.map((eva, index) => (
-              <div
-                className="flex border-l-2  border-l-black  text-xs w-full items-center justify-between gap-6 px-3 py-6  border bg-slate-200 rounded-md"
-                key={index}
-              >
-                <li>{eva.teacher.fullName.split(" ")[0]}</li>
-                <li>{eva.assessmentArea}</li>
-                <li>{eva.criteria}</li>
-                <li>{eva.rating}</li>
-                <li>{eva.points}</li>
-                <h1>
-                  <CiEdit
-                    className="bg-black text-white w-7 h-7 rounded-md p-1 cursor-pointer"
-                    onClick={() =>
-                      handleEditClick(
-                        eva.evaluation_No,
-                        eva.teacher.phone.replace(/\+252/g, "")
-                      )
-                    }
-                  />
-                </h1>
-              </div>
-            ))}
+          <ul className="flex flex-col w-full gap-3 max-h-[460px] bg-slate-300 p-1 rounded-lg overflow-y-auto scrollbar-thin">
+            {ListEvaluationState.data?.data
+              ?.slice()
+              .reverse()
+              .map((eva, index) => (
+                <div
+                  className="flex border-l-2  border-l-black  text-xs w-full items-center justify-between gap-6 px-3 py-6  border bg-slate-200 rounded-md"
+                  key={index}
+                >
+                  <li>{eva.teacher.fullName.split(" ")[0]}</li>
+                  <li>
+                    {eva.assessmentArea.map((area) => (
+                      <span>{area.replace("_", " ").toLowerCase()}</span>
+                    ))}
+                  </li>
+                  <li>
+                    {eva.criteria.map((cri) => (
+                      <span>{cri.replace("_", " ").toLowerCase()}</span>
+                    ))}
+                  </li>
+                  <li className="font-geist font-medium">
+                    {eva.rating.map((rate) => (
+                      <span>{rate.replace("_", " ").toLowerCase()}</span>
+                    ))}
+                  </li>
+                  <li>{eva.points}</li>
+                  <h1>
+                    <CiEdit
+                      className="bg-black text-white w-7 h-7 rounded-md p-1 cursor-pointer"
+                      onClick={() =>
+                        handleEditClick(
+                          eva.evaluation_No,
+                          eva.teacher.phone.replace(/\+252/g, "")
+                        )
+                      }
+                    />
+                  </h1>
+                </div>
+              ))}
           </ul>
         </div>
       </div>
-      <div className="border border-black rounded-lg">
+      <div className=" rounded-lg flex flex-col  gap-3 ">
         <div className=" h-40 rounded-lg  grid grid-cols-2 items-center justify-start  gap-6">
           <Link
             to={"/dashboard/fetch-evaluations"}
@@ -190,6 +207,33 @@ const Dashboard = () => {
               </h1>
             </div>
           </Link>
+        </div>
+        <div className="teacherList bg-slate-300 h-full p-5 rounded-lg w-full flex flex-col gap-4">
+          <div className="labels">
+            <h1 className="text-xl font-geist font-bold">Teachers</h1>
+          </div>
+          <div className="data flex flex-col gap-3 ">
+            {listTeacherSlice.data?.data
+              ?.slice()
+
+              .sort()
+              .map((teach, index) => (
+                <div
+                  key={index}
+                  className=" flex justify justify-between p-4 font-geist  bg-slate-200 border-4 hover:bg-slate-100 duration-700 border-slate-300 rounded-lg"
+                >
+                  <FaUserTie className="text-[14px]  p-2 rounded-md bg-black text-white w-8 h-8" />
+                  <h1 className="w-[14px] ">{teach.id}</h1>
+                  <h1 className="w-[230px] ">{teach.fullName}</h1>
+                  <h1 className="flex items-center gap-3 ">
+                    <span>
+                      <ImPhone className="text-[14px] p-2 rounded-md bg-black text-white w-8 h-8" />
+                    </span>
+                    {teach.phone.replace("+252", "")}
+                  </h1>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>

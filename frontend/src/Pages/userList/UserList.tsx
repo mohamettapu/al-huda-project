@@ -11,16 +11,22 @@ const UserList = () => {
   const [edittingUser, setEditingUser] = useState<userResult | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const userListState = useSelector((state: RootState) => state.listUser);
-
+  const [isVisible, setIsVisible] = useState(false);
   const changeRoleState = useSelector((state: RootState) => state.changeRole);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [setIsVisible]);
+  useEffect(() => {
     dispatch(userListFN());
-  }, [dispatch, changeRoleState.isSuccess]);
+  }, [dispatch, setIsVisible, changeRoleState.isSuccess]);
 
   if (userListState.isLoading) {
     return (
-      <h1 className="w-full py-5 rounded-md bg-[#97979742] animate-pulse"></h1>
+      <div className="w-full py-5 rounded-md bg-[#97979742] animate-pulse duration-1000"></div>
     );
   }
 
@@ -32,11 +38,15 @@ const UserList = () => {
   // console.log("filtered users are", filteredUsers);
 
   return (
-    <div className="p-4 h-full flex flex-col gap-3 ">
+    <div
+      className={`rounded-md mt-6 transition-opacity duration-1000 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-56 opacity-0"
+      }`}
+    >
       <div className="labels flex  items-center justify-between gap-3 ">
         <div className="desc flex items-center gap-3">
           <FaCircleUser className="text-4xl" />
-          <div className="info">
+          <div className="info flex flex-col justify-center mb-3">
             <h1 className="text-3xl font-geist font-bold">Users list</h1>
             <h1 className="text-xs font-geist font-bold">
               all users of the system
@@ -55,8 +65,8 @@ const UserList = () => {
         </div>
       </div>
 
-      <div className="userList bg-slate-300 h-full rounded-lg p-5 flex flex-col gap-3">
-        <div className="grid grid-cols-7 w-full justify-items-center items-center ">
+      <div className="userList bg-slate-200 h-full rounded-lg  flex flex-col gap-1 ">
+        <div className="grid grid-cols-7 w-full justify-items-center items-center bg-slate-300 font-bold p-5 rounded-md">
           <h1 className="font-geist ">Firstname</h1>
           <h1 className="font-geist ">Lastname</h1>
           <h1 className="font-geist ">Username</h1>
@@ -69,7 +79,7 @@ const UserList = () => {
           filteredUsers.map((user, index) => (
             <div
               key={index}
-              className="grid grid-cols-7 w-full  justify-items-center items-center "
+              className="grid grid-cols-7 w-full  justify-items-center items-center bg-slate-300 rounded-md py-2 hover:bg-slate-200 duration-700 "
             >
               <h1 className="font-geist ">{user.firstname}</h1>
               <h1 className="font-geist ">{user.lastname}</h1>

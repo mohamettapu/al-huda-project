@@ -52,5 +52,5 @@
 }
 
 .dashboard-animate {
-  animation: fadeIn 0.1s ease forwards; /* Adjust duration and timing as needed */
+  animation: fadeIn 0.1s ease forwards;
 }

@@ -66,9 +66,11 @@ const Dashboard = () => {
   };
   return (
     <div
-      className={`text-black ${
-        isVisible ? "dashboard-animate" : ""
-      } grid grid-cols-2 gap-6 p-8 h-full min-w-[70%]`}
+      className={`transition-opacity duration-1000 transform ${
+        isVisible
+          ? "translate-y-0 opacity-100 grid grid-cols-2 gap-6 p-8 h-full min-w-[70%]"
+          : "translate-y-56 opacity-0 grid grid-cols-2 gap-6 p-8 h-full min-w-[70%]"
+      }`}
     >
       <div className="mainLabel border  rounded-lg flex flex-col gap-4">
         <div className="bg-slate-300 h-32 rounded-lg p-6 flex items-center justify-start gap-52">
@@ -208,15 +210,17 @@ const Dashboard = () => {
             </div>
           </Link>
         </div>
-        <div className="teacherList bg-slate-300 h-full p-5 rounded-lg w-full flex flex-col gap-4">
+        <Link
+          to={"/dashboard/list-teacher"}
+          className="teacherList bg-slate-300 h-[570px] p-5 rounded-lg w-full flex flex-col gap-4 overflow-y-auto scrollbar-thin"
+        >
           <div className="labels">
             <h1 className="text-xl font-geist font-bold">Teachers</h1>
           </div>
           <div className="data flex flex-col gap-3 ">
             {listTeacherSlice.data?.data
-              ?.slice()
-
-              .sort()
+              ?.slice(0, 7)
+              .reverse()
               .map((teach, index) => (
                 <div
                   key={index}
@@ -234,7 +238,7 @@ const Dashboard = () => {
                 </div>
               ))}
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

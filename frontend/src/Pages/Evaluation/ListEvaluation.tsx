@@ -81,7 +81,7 @@ const ListEvaluation = () => {
                         {teacher.teacher.fullName}
                       </h1>
                       <h1 className=" text-xs font-geist font-semibold leading-4 text-[14px]">
-                        {teacher.teacher.phone}
+                        {teacher.teacher.phone.replace(/\+252/g, "")}
                       </h1>
                     </div>
                     <div className="edit  p-1 rounded-full flex items-center gap-4">
@@ -104,21 +104,21 @@ const ListEvaluation = () => {
                     <h1 className="flex flex-col justify-center h-full gap-3 ">
                       {teacher.assessmentArea.map((area, index) => (
                         <h2 className="font-geist text-[14px] " key={index}>
-                          {area.toLowerCase()}
+                          {area.toLowerCase().replace(/_/g, " ")}
                         </h2>
                       ))}
                     </h1>
                     <h1 className="flex flex-col justify-center h-full gap-3">
                       {teacher.criteria.map((criteria, index) => (
                         <h2 className="font-geist text-[14px] " key={index}>
-                          {criteria.toLowerCase()}
+                          {criteria.toLowerCase().replace(/_/g, " ")}
                         </h2>
                       ))}
                     </h1>
                     <h1 className="flex flex-col justify-center h-full gap-3">
                       {teacher.rating.map((rating, index) => (
                         <h2 className="font-geist text-[14px] " key={index}>
-                          {rating.toLowerCase()}
+                          {rating.toLowerCase().replace(/_/g, " ")}
                         </h2>
                       ))}
                     </h1>

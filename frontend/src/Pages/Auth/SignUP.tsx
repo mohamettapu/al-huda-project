@@ -56,12 +56,12 @@ const SignUp = () => {
     <div className="  rounded-md mt-6 ">
       <form
         onSubmit={formik.handleSubmit}
-        className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[49%] relative h-[43rem] px-20 py-14 mx-auto flex flex-col gap-8 items-center"
+        className="form  shadow rounded-[1rem] bg-[#F0F9FF] lg:w-[49%] relative  px-20 py-14 mx-auto flex flex-col gap-8 items-center"
       >
         <div className="labels flex flex-col text-center ">
           <label
             htmlFor=""
-            className="font-geist font-bold text-2xl text-[#1e1e20dd]"
+            className="font-geist font-bold text-2xl   text-[#1e1e20dd]"
           >
             Welcome Create Account!
           </label>
@@ -70,7 +70,7 @@ const SignUp = () => {
           </label>
         </div>
 
-        <div className=" inputs w-[100%] grid grid-cols-2 gap-4">
+        <div className=" inputs w-[100%] grid lg:grid-cols-2 md:grid-cols-2  gap-4">
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <h1 className="font-geist text-[1.1rem] font-medium text-[#38383c]">
               Firsname

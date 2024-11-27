@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import "../.././styles/shadow.css";
+import "../.././styles/RWD.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Redux/store";
 import { useEffect, useState } from "react";
@@ -47,11 +48,11 @@ const Login = () => {
     }),
   });
   return (
-    <div className="  rounded-md mt-6 ">
+    <div className="login  rounded-md mt-6 w-full  max-w-[90%] mx-auto ">
       {isAnimating && <div className="line-animation" />}
       <form
         onSubmit={formik.handleSubmit}
-        className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[33%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"
+        className="form  shadow rounded-[1rem] bg-[#F0F9FF] lg:w-[33%] 2xl:w-[35%] h-[35rem] px-10 py-14  md:w-[90%] sm: mx-auto flex flex-col gap-8 items-center"
       >
         <div className="labels flex flex-col text-center ">
           <label

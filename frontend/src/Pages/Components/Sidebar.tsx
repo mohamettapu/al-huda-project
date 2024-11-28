@@ -11,7 +11,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { useState } from "react";
 import { IoMdPrint } from "react-icons/io";
 
-const Sidebar = () => {
+const Sidebar = ({ onLinkClick }: { onLinkClick: () => void }) => {
   const navigate = useNavigate();
   const [showLinks, setShowLinks] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -33,12 +33,14 @@ const Sidebar = () => {
       <div className="links flex flex-col gap-3 flex-grow px-3 py-5 mt-6">
         <Link
           to={"/dashboard"}
+          onClick={onLinkClick}
           className="text-[14px] flex items-center gap-3 font-geist font-bold hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
           <RxDashboard className="text-xl bg-black text-white  p-1 rounded-md w-7 h-7" />
           Dashboard
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"fetch-users"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -46,6 +48,7 @@ const Sidebar = () => {
           users
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"create-evaluation"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -53,6 +56,7 @@ const Sidebar = () => {
           Add Evaluation
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"edit-evaluations"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -60,6 +64,7 @@ const Sidebar = () => {
           Edit Evaluation
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"fetch-evaluations"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -67,6 +72,7 @@ const Sidebar = () => {
           Evaluation List
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"create-teacher"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -74,6 +80,7 @@ const Sidebar = () => {
           add teacher
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"update-teacher"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -81,6 +88,7 @@ const Sidebar = () => {
           edit teacher
         </Link>
         <Link
+          onClick={onLinkClick}
           to={"list-teacher"}
           className="text-[14px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 px-6 rounded-md duration-500"
         >
@@ -97,6 +105,7 @@ const Sidebar = () => {
         {showLinks && (
           <div className="flex flex-col gap-3 mt-3 ml-3 px-6">
             <Link
+              onClick={onLinkClick}
               to={"teacher-report"}
               className="text-[11px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 rounded-md duration-500"
             >
@@ -104,6 +113,7 @@ const Sidebar = () => {
               Print teachers
             </Link>
             <Link
+              onClick={onLinkClick}
               to={"evaluation-report"}
               className="text-[11px] font-geist font-bold flex items-center gap-3 hover:bg-[#d5e7f3] py-2 rounded-md duration-500"
             >

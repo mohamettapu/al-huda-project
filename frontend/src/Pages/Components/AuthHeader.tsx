@@ -3,7 +3,7 @@ import "../../styles/shadow.css";
 
 const AuthHeader = () => {
   return (
-    <div className=" authHeaderSHadow flex items-center justify-between lg:w-[90%]  lg:mx-auto  md:w-full  border-[#11030338] mt-2 rounded-[0.4rem] sm:px-10  md:px-10 lg:px-10 py-2">
+    <div className=" authHeaderSHadow flex items-center justify-between lg:w-[90%]  lg:mx-auto  md:w-full  border-[#11030338] mt-2 rounded-[0.4rem] px-10 py-2">
       <div className="">
         <label
           htmlFor=""

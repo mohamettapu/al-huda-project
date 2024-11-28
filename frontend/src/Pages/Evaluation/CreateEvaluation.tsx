@@ -157,10 +157,12 @@ const CreateEvaluation: React.FC = () => {
     >
       <form
         onSubmit={formik.handleSubmit} // This submits the final accumulated data
-        className="flex flex-col  justify-center items-center border-black   gap-7   w-full "
+        className="flex flex-col  justify-center items-center    gap-7   w-full "
       >
-        <div className="main w-[45%] shadow flex flex-col bg-[#F0F9FF]  gap-3 items-center   px-10 py-5 rounded-xl">
-          <h2 className="text-4xl font-geist font-bold">Create Evaluation</h2>
+        <div className="main lg:w-[45%] md:w-full md:max-w-[90%]  shadow flex flex-col bg-[#F0F9FF]  gap-3 items-center   px-10 py-5 rounded-xl">
+          <h2 className=" md:text-7xl lg:text-4xl lg:text-left md:text-center  font-geist font-bold">
+            Create Evaluation
+          </h2>
           <div className="inputContainers  w-[100%] p-5 flex flex-col gap-3">
             <div className="inputContainer flex flex-col gap-1">
               <label
@@ -253,9 +255,7 @@ const CreateEvaluation: React.FC = () => {
               <h1 className="text-white font-geist text-xl">
                 Teacher Evaluation
               </h1>
-              <h1 className="text-white  text-[14px] font-acumin">
-                Name: Farhaan abdi ali
-              </h1>
+
               <h1 className="text-white font-geist text-xs">
                 Teacher Phone: {evaluationData.phone}
               </h1>
@@ -272,7 +272,7 @@ const CreateEvaluation: React.FC = () => {
               </h1>
             </div>
           </div>
-          <div className="grid grid-cols-5 gap-3 items-center w-full   text-white  ">
+          <div className="grid lg:grid-cols-5 gap-3 items-center w-full   text-white  ">
             <h1 className="text-xl font-geist"> Areas</h1>
 
             <h1 className="text-xl font-geist">Criteria</h1>

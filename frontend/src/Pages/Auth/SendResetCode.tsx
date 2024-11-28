@@ -48,10 +48,10 @@ const SendResetCode = () => {
     }),
   });
   return (
-    <div className="  rounded-md mt-6 ">
+    <div className="  rounded-md mt-6  ">
       <form
         onSubmit={formik.handleSubmit}
-        className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[33%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"
+        className="form  shadow rounded-[1rem] bg-[#F0F9FF] lg:w-[33%] max-w-[90%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"
       >
         <div className="labels flex flex-col text-center ">
           <label
@@ -65,7 +65,7 @@ const SendResetCode = () => {
           </label>
         </div>
 
-        <div className=" inputs w-[100%] flex flex-col gap-3">
+        <div className=" inputs w-[100%] flex flex-col gap-6 ">
           <div className="inputContainer flex flex-col items-start gap-2 ">
             <h1 className="font-geist text-[1.1rem] font-medium text-[#38383c]">
               Email Address

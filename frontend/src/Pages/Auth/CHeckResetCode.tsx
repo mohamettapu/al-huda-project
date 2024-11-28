@@ -8,7 +8,10 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 // import { LoginFN } from "../../Redux/Slices/Auth/loginSLice";
 
-import { checkResetCodeFN, resetData } from "../../Redux/Slices/Auth/checkResetCode";
+import {
+  checkResetCodeFN,
+  resetData,
+} from "../../Redux/Slices/Auth/checkResetCode";
 // import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const CheckResetCode = () => {
@@ -50,7 +53,7 @@ const CheckResetCode = () => {
     <div className="  rounded-md mt-6 ">
       <form
         onSubmit={formik.handleSubmit}
-        className="form  shadow rounded-[1rem] bg-[#F0F9FF] w-[33%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"
+        className="form  shadow rounded-[1rem] bg-[#F0F9FF] lg:w-[33%] max-w-[90%] h-[35rem] px-10 py-14 mx-auto flex flex-col gap-8 items-center"
       >
         <div className="labels flex flex-col text-center ">
           <label
